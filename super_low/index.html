@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=320,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport"/>
+    <!--    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->
+    <script src="js/jquery.min.js"></script>
+</head>
+<body>
+<div id="test" style="font-size:64px;text-align:center;">0</div>
+<script src="js/quzou.js"></script>
+<script src="js/zouluzhuan.js"></script>
+<script>
+    //趣走
+    var test = document.getElementById('test');
+    var flag = 0;
+    var interwalTime = 0;
+    var m = 0;
+
+    //趣走
+    function run() {
+        clearInterval(i);
+        test.innerHTML = ++flag;
+        j = randomNum(1, 4);
+        if (flag < 2000) {
+            interwalTime = randomNum(15011, 20000);
+            i = setInterval("run()", interwalTime);
+        } else {
+            flag = 0;
+            interwalTime = randomNum(86400000, 86800000);
+            i = setInterval("run()", interwalTime);
+        }
+        if (flag <= 10) {
+            games();
+            richang();
+        }
+        if (j == 1) {
+            news();
+        }
+        if (j == 2) {
+            videos();
+        }
+        if (j == 3) {
+            game1();
+        }
+        if (j == 4) {
+            game2();
+        }
+    }
+
+    //整点领红包
+    function zdRun() {
+        clearInterval(k);
+        m = randomNum(1500000, 2100000);
+        k = setInterval("zdRun()", m);
+        zhengDian();
+    }
+
+    var i = setInterval("run()", interwalTime);
+
+    var k = setInterval("zdRun()", m);
+
+    //走路赚
+    var myFlag = 0,num = 0;
+    var myInterwalTime = 0;
+
+    function zRun() {
+        clearInterval(l);
+        test.innerHTML = ++myFlag;
+        if (myFlag < 500){
+            num = randomNum(0,2);
+            myInterwalTime = randomNum(30001,60000);
+            l = setInterval("zRun()", myInterwalTime);
+        }
+        zCoin = randomNum(15, 18);
+        if (myFlag <= 3) {
+            zLogin();
+            zBushu1();
+            zBushu2(myInterwalTime);
+        }
+        if (num == 0) {
+            zVideos();
+        }
+        if (num == 1) {
+            zBox();
+        }
+        if (num == 2) {
+            zHome(zCoin);
+        }
+        zZhuanPan();
+    }
+    var l = setInterval("zRun()", myInterwalTime);
+
+</script>
+</body>
+</html>
