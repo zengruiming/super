@@ -44,4 +44,4 @@ function Query() {
 
 };
 
-module.exports = Query;
+module.exports = new Query();

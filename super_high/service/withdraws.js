@@ -24,4 +24,4 @@ function Withdraws() {
 
 };
 
-module.exports = Withdraws;
+module.exports = new Withdraws();

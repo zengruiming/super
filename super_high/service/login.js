@@ -121,4 +121,4 @@ function Login() {
 
 };
 
-module.exports = Login;
+module.exports = new Login();

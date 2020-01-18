@@ -145,4 +145,4 @@ function Task() {
 
 };
 
-module.exports = Task;
+module.exports = new Task();
