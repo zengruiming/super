@@ -71,7 +71,7 @@ function myWithdraws() {
     withdraws.withdrawsConfirm(myHeader2, myImei2, 100)
 }
 
-// myWithdraws();
+myWithdraws();
 // mylogin();
 // myQuery();
 // myTask();
