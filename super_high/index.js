@@ -5,8 +5,11 @@ var withdraws = require('./service/withdraws')
 var randomNum = require('./utils/randomNum')
 var getNowFormatDate = require('./utils/getNowFormatDate')
 var headerAndImei = require('./domain/headerAndImei')
-var l,m,num1,myTimeout,dayTimeout
+var num, myTimeout, dayTimeout
 var times = 0
+
+//刷分总次数
+var number = 700
 
 
 //查询
@@ -30,29 +33,26 @@ function mylogin(myHeader, myImei) {
 }
 
 //任务
-function myTask(myHeader, myImei,tag) {
+function myTask(myHeader, myImei) {
     times++;
-    if (times <= 1) {
+    if (times <= 2) {
         task.signCoin(myHeader, myImei)//签到
         task.signCoinDouble(myHeader, myImei) //签到翻倍
     }
-    if (times <= 3) task.advertisementCount(myHeader, myImei) //步数1-1
-    if (times == 4) task.exchangedCoin(myHeader, myImei, randomNum(10000, 20000)) //步数1-2
-    num1 = randomNum(0,2)
-    if (num1 == 0)task.newsVideoCoin(myHeader,myImei) //刷新闻视频
-    if (num1 == 1)task.videoCoin(myHeader,myImei) //开宝箱
-    if (num1 == 2) task.randCoin(myHeader,myImei, randomNum(15,18)) //首页金币
-    task.turntableCoin(myHeader,myImei) //幸运大转盘
-    myTimeout = randomNum(30001,60000)
-    console.log('第'+times+'次')
-    if (times <= 1000 && tag == 1){
-        clearInterval(l)
-        l = setInterval(myTask, myTimeout, headerAndImei.myHeader1, headerAndImei.myImei1,1)
+    if (times <= 6) task.advertisementCount(myHeader, myImei) //步数1-1
+    if (times == 8) task.exchangedCoin(myHeader, myImei, randomNum(10001, 20001)) //步数1-2
+    num = randomNum(0,3)
+    if (num == 0) task.newsVideoCoin(myHeader,myImei) //刷新闻视频
+    if (num == 1) task.videoCoin(myHeader,myImei) //看推荐视频
+    if (num == 2) task.randCoin(myHeader,myImei, randomNum(15,18)) //首页随机金币
+    if (times <= (100-1)*2) task.turntableCoin(myHeader, myImei) //幸运大转盘
+    myTimeout = randomNum(30001, 60000)
+    if (times <= (number-1)*2) {
+        setTimeout(myTask, myTimeout, myHeader, myImei)
+    }else {
+        task.chestcoin(myTimeout, myHeader)
     }
-    if (times <= 1000 && tag == 2){
-        clearInterval(m)
-        m = setInterval(myTask, myTimeout, headerAndImei.myHeader2, headerAndImei.myImei2,2)
-    }
+    console.log('第' + Math.round(times/2) + '次')
 }
 
 //提现
@@ -62,16 +62,15 @@ function myWithdraws(myHeader, myImei) {
 
 // myWithdraws(headerAndImei.myHeader2,headerAndImei.myImei2);
 // mylogin(headerAndImei.myHeader2,headerAndImei.myImei2);
-myQuery(headerAndImei.myHeader2,headerAndImei.myImei2);
+// myQuery(headerAndImei.myHeader2,headerAndImei.myImei2);
 // myTask(headerAndImei.myHeader2, headerAndImei.myImei2);
 
-// myTask(headerAndImei.myHeader1, headerAndImei.myImei1,1)
+// mylogin(headerAndImei.myHeader1, headerAndImei.myImei1)
+// myTask(headerAndImei.myHeader1, headerAndImei.myImei1)
 // dayTimeout = randomNum(86400000-10800000,86400000+10800000)
-// setInterval(myTask, dayTimeout, headerAndImei.myHeader1, headerAndImei.myImei1, 1)
+// setInterval(myTask, dayTimeout, headerAndImei.myHeader1, headerAndImei.myImei1)
 //
-// myTask(headerAndImei.myHeader2, headerAndImei.myImei2,2)
+// mylogin(headerAndImei.myHeader2, headerAndImei.myImei2)
+// myTask(headerAndImei.myHeader2, headerAndImei.myImei2)
 // dayTimeout = randomNum(86400000-10800000,86400000+10800000)
-// setInterval(myTask, dayTimeout, headerAndImei.myHeader2, headerAndImei.myImei2, 2)
-
-
-task.turntableCoin(headerAndImei.myHeader1,headerAndImei.myImei1) //幸运大转盘
+// setInterval(myTask, dayTimeout, headerAndImei.myHeader2, headerAndImei.myImei2)

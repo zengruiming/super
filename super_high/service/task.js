@@ -9,11 +9,11 @@ function Task() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei='+imei+'&source=ios&version=1.2.5'
+            body: 'device=ios&imei=' + imei + '&source=ios&version=1.2.5'
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('签到:'+body)
+                console.log('签到:' + body)
             }
         })
     }
@@ -25,11 +25,11 @@ function Task() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei='+imei+'&source=ios&version=1.2.5'
+            body: 'device=ios&imei=' + imei + '&source=ios&version=1.2.5'
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('签到翻倍:'+body)
+                console.log('签到翻倍:' + body)
             }
         })
     }
@@ -41,11 +41,11 @@ function Task() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'ad_type=tengxun&device=ios&imei='+imei+'&source=ios&version=1.2.5'
+            body: 'ad_type=tengxun&device=ios&imei=' + imei + '&source=ios&version=1.2.5'
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('步数1-1:'+body)
+                console.log('步数1-1:' + body)
             }
         })
     }
@@ -57,11 +57,11 @@ function Task() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei='+imei+'&source=ios&step='+num+'&version=1.2.5'
+            body: 'device=ios&imei=' + imei + '&source=ios&step=' + num + '&version=1.2.5'
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('步数1-2:'+body)
+                console.log('步数1-2:' + body)
             }
         })
     }
@@ -73,11 +73,11 @@ function Task() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei='+imei+'&source=ios&version=1.2.5'
+            body: 'device=ios&imei=' + imei + '&source=ios&version=1.2.5'
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('刷新闻视频:'+body)
+                console.log('刷新闻视频:' + body)
             }
         })
     }
@@ -89,11 +89,11 @@ function Task() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei='+imei+'&source=ios&version=1.2.5'
+            body: 'device=ios&imei=' + imei + '&source=ios&version=1.2.5'
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('开宝箱:'+body)
+                console.log('看推荐视频:' + body)
             }
         })
     }
@@ -106,11 +106,11 @@ function Task() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'coin='+coin+'&device=ios&double=1&imei='+imei+'&source=ios&version=1.2.5'
+            body: 'coin=' + coin + '&device=ios&double=1&imei=' + imei + '&source=ios&version=1.2.5'
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('首页金币:'+body)
+                console.log('首页随机金币:' + body)
             }
         })
     }
@@ -119,28 +119,47 @@ function Task() {
 //幸运大转盘
     this.turntableCoin = function (header, imei) {
         request({
-            url: 'http://api.xiaomuyu888.com/api/turntable/turntableCoin?imei='+imei+'&source=ios&device=ios&version=1.2.5',
+            url: 'http://api.xiaomuyu888.com/api/turntable/turntableCoin?imei=' + imei + '&source=ios&device=ios&version=1.2.5',
             method: 'get',
             gzip: true,
             headers: header,
         }, function (error, res, body) {
-            if (!error && res.statusCode == 200 && JSON.parse(body).data.coin > 0) {
-                //输出返回的内容
-                console.log('幸运大转盘首页:'+JSON.parse(body).data.coin)
-                request({
-                    url: 'http://api.xiaomuyu888.com/api/turntable/double?imei='+imei+'&jsoncallback=callback',
-                    method: 'post',
-                    gzip: true,
-                    headers: header,
-                    body: 'source=ios&device=ios&unique=' + JSON.parse(body).data.unique
-                }, function (error, res, body) {
-                    if (!error && res.statusCode == 200) {
-                        //输出返回的内容
-                        console.log('幸运大转盘金币:'+body)
-                    }
-                })
+            if (!error && res.statusCode == 200 && body.indexOf("coin") != -1) {
+                if (JSON.parse(body).data.coin > 0) {
+                    //输出返回的内容
+                    console.log('幸运大转盘首页:' + JSON.parse(body).data.coin)
+                    request({
+                        url: 'http://api.xiaomuyu888.com/api/turntable/double?imei=' + imei + '&jsoncallback=callback',
+                        method: 'post',
+                        gzip: true,
+                        headers: header,
+                        body: 'source=ios&device=ios&unique=' + JSON.parse(body).data.unique
+                    }, function (error, res, body) {
+                        if (!error && res.statusCode == 200) {
+                            //输出返回的内容
+                            console.log('幸运大转盘金币:' + body)
+                        }
+                    })
+                }
             }
         })
+    }
+
+    //开宝箱
+    this.chestcoin = function (header, imei) {
+        var arr=[5,30,60,100]
+        for(j = 0,len=arr.length; j < len; j++) {
+            request({
+                url: 'http://api.xiaomuyu888.com/api/turntable/chestcoin?imei=' + imei + '&jsoncallback=callback',
+                method: 'post',
+                gzip: true,
+                headers: header,
+                body: 'source=ios&device=ios&num=' + arr[j]
+            }, function (error, res, body) {
+                //输出返回的内容
+                console.log('开宝箱:' + body)
+            })
+        }
     }
 
 };
