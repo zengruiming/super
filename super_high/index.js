@@ -44,14 +44,14 @@ function myTask(myHeader, myImei,tag) {
     if (num1 == 2) task.randCoin(myHeader,myImei, randomNum(15,18)) //首页金币
     task.turntableCoin(myHeader,myImei) //幸运大转盘
     myTimeout = randomNum(30001,60000)
-    console.log(myTimeout)
-    if (times <= 500 && tag == 1){
+    console.log('第'+times+'次')
+    if (times <= 1000 && tag == 1){
         clearInterval(l)
-        l = setInterval(myTask, myTimeout, headerAndImei.myHeader1, headerAndImei.myImei1)
+        l = setInterval(myTask, myTimeout, headerAndImei.myHeader1, headerAndImei.myImei1,1)
     }
-    if (times <= 500 && tag == 2){
+    if (times <= 1000 && tag == 2){
         clearInterval(m)
-        m = setInterval(myTask, myTimeout, headerAndImei.myHeader2, headerAndImei.myImei2)
+        m = setInterval(myTask, myTimeout, headerAndImei.myHeader2, headerAndImei.myImei2,2)
     }
 }
 
@@ -62,13 +62,16 @@ function myWithdraws(myHeader, myImei) {
 
 // myWithdraws(headerAndImei.myHeader2,headerAndImei.myImei2);
 // mylogin(headerAndImei.myHeader2,headerAndImei.myImei2);
-// myQuery(headerAndImei.myHeader2,headerAndImei.myImei2);
+myQuery(headerAndImei.myHeader2,headerAndImei.myImei2);
 // myTask(headerAndImei.myHeader2, headerAndImei.myImei2);
 
-myTask(headerAndImei.myHeader1, headerAndImei.myImei1,1)
-dayTimeout = randomNum(86400000-10800000,86400000+10800000)
-setInterval(myTask, dayTimeout, headerAndImei.myHeader1, headerAndImei.myImei1, 1)
+// myTask(headerAndImei.myHeader1, headerAndImei.myImei1,1)
+// dayTimeout = randomNum(86400000-10800000,86400000+10800000)
+// setInterval(myTask, dayTimeout, headerAndImei.myHeader1, headerAndImei.myImei1, 1)
+//
+// myTask(headerAndImei.myHeader2, headerAndImei.myImei2,2)
+// dayTimeout = randomNum(86400000-10800000,86400000+10800000)
+// setInterval(myTask, dayTimeout, headerAndImei.myHeader2, headerAndImei.myImei2, 2)
 
-myTask(headerAndImei.myHeader2, headerAndImei.myImei2,2)
-dayTimeout = randomNum(86400000-10800000,86400000+10800000)
-setInterval(myTask, dayTimeout, headerAndImei.myHeader2, headerAndImei.myImei2, 2)
+
+task.turntableCoin(headerAndImei.myHeader1,headerAndImei.myImei1) //幸运大转盘
