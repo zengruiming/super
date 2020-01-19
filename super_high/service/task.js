@@ -145,7 +145,7 @@ function Task() {
         })
     }
 
-    //开宝箱
+//开宝箱
     this.chestcoin = function (header, imei) {
         var arr=[5,30,60,100]
         for(j = 0,len=arr.length; j < len; j++) {
