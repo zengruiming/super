@@ -9,7 +9,7 @@ var num, myTimeout, dayTimeout
 var times = 0
 
 //刷分总次数
-var number = 700
+var number = 500
 
 
 //查询
