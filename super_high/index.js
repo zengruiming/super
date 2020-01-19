@@ -65,12 +65,12 @@ function myWithdraws(myHeader, myImei) {
 // myQuery(headerAndImei.myHeader2,headerAndImei.myImei2);
 // myTask(headerAndImei.myHeader2, headerAndImei.myImei2);
 
-// mylogin(headerAndImei.myHeader1, headerAndImei.myImei1)
-// myTask(headerAndImei.myHeader1, headerAndImei.myImei1)
-// dayTimeout = randomNum(86400000-10800000,86400000+10800000)
-// setInterval(myTask, dayTimeout, headerAndImei.myHeader1, headerAndImei.myImei1)
-//
-// mylogin(headerAndImei.myHeader2, headerAndImei.myImei2)
-// myTask(headerAndImei.myHeader2, headerAndImei.myImei2)
-// dayTimeout = randomNum(86400000-10800000,86400000+10800000)
-// setInterval(myTask, dayTimeout, headerAndImei.myHeader2, headerAndImei.myImei2)
+mylogin(headerAndImei.myHeader1, headerAndImei.myImei1)
+myTask(headerAndImei.myHeader1, headerAndImei.myImei1)
+dayTimeout = randomNum(86400000-10800000,86400000+10800000)
+setInterval(myTask, dayTimeout, headerAndImei.myHeader1, headerAndImei.myImei1)
+
+mylogin(headerAndImei.myHeader2, headerAndImei.myImei2)
+myTask(headerAndImei.myHeader2, headerAndImei.myImei2)
+dayTimeout = randomNum(86400000-10800000,86400000+10800000)
+setInterval(myTask, dayTimeout, headerAndImei.myHeader2, headerAndImei.myImei2)
