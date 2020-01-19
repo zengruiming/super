@@ -66,16 +66,20 @@ function myWithdraws(myHeader, myImei) {
 // myTask(headerAndImei.myHeader2, headerAndImei.myImei2);
 
 //日常刷
-mylogin(headerAndImei.myHeader1, headerAndImei.myImei1)
-myTask(headerAndImei.myHeader1, headerAndImei.myImei1)
-dayTimeout = randomNum(86400000-10800000,86400000+10800000)
-setInterval(myTask, dayTimeout, headerAndImei.myHeader1, headerAndImei.myImei1)
-
-mylogin(headerAndImei.myHeader2, headerAndImei.myImei2)
-myTask(headerAndImei.myHeader2, headerAndImei.myImei2)
-dayTimeout = randomNum(86400000-10800000,86400000+10800000)
-setInterval(myTask, dayTimeout, headerAndImei.myHeader2, headerAndImei.myImei2)
+// mylogin(headerAndImei.myHeader1, headerAndImei.myImei1)
+// myTask(headerAndImei.myHeader1, headerAndImei.myImei1)
+// dayTimeout = randomNum(86400000-10800000,86400000+10800000)
+// setInterval(myTask, dayTimeout, headerAndImei.myHeader1, headerAndImei.myImei1)
+//
+// mylogin(headerAndImei.myHeader2, headerAndImei.myImei2)
+// myTask(headerAndImei.myHeader2, headerAndImei.myImei2)
+// dayTimeout = randomNum(86400000-10800000,86400000+10800000)
+// setInterval(myTask, dayTimeout, headerAndImei.myHeader2, headerAndImei.myImei2)
 
 //无限刷
 // setInterval(task.randCoin,1,headerAndImei.myHeader1, headerAndImei.myImei1, randomNum(15,18))
 // setInterval(task.randCoin,1,headerAndImei.myHeader2, headerAndImei.myImei2, randomNum(15,18))
+
+// task.cardReceiveCoin(headerAndImei.myHeader2, headerAndImei.myImei2)
+
+setTimeout(task.cardReceiveCoin, 10000, headerAndImei.myHeader2, headerAndImei.myImei2)

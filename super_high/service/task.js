@@ -1,4 +1,5 @@
 var request = require('request');
+var randomNum = require('../utils/randomNum');
 
 function Task() {
 
@@ -160,6 +161,33 @@ function Task() {
                 console.log('开宝箱:' + body)
             })
         }
+    }
+
+//刮卡奖励
+    this.cardReceiveCoin = function (header, imei) {
+        var arr=[5,10,15]
+        request({
+            url: 'https://api.xiaomuyu888.com/api/Card/cardList',
+            method: 'post',
+            gzip: true,
+            headers: header,
+            body: 'device=ios&imei=' + imei + '&source=ios&version=1.2.5'
+        }, function (error, res, body) {
+            //输出返回的内容
+            console.log('刮卡:' + JSON.parse(body).data['surplus_numbers'])
+            if (JSON.parse(body).data['surplus_numbers']!=0) {
+                request({
+                    url: 'https://api.xiaomuyu888.com/api/Card/cardReceiveCoin',
+                    method: 'post',
+                    gzip: true,
+                    headers: header,
+                    body: 'coin=' + arr[randomNum(0, 2)] + '&device=ios&id=' + randomNum(2, 20) + '&imei=' + imei + '&is_double=1&source=ios&version=1.2.5'
+                }, function (error, res, body) {
+                    //输出返回的内容
+                    console.log('刮卡奖励:' + body)
+                })
+            }
+        })
     }
 
 };
