@@ -45,6 +45,7 @@ function myTask(myHeader, myImei) {
     if (num == 0) task.newsVideoCoin(myHeader,myImei) //刷新闻视频
     if (num == 1) task.videoCoin(myHeader,myImei) //看推荐视频
     if (num == 2) task.randCoin(myHeader,myImei, randomNum(15,18)) //首页随机金币
+    if (num == 3) task.cardReceiveCoin(myHeader,myImei) //刮卡奖励
     if (times <= (100-1)*2) task.turntableCoin(myHeader, myImei) //幸运大转盘
     myTimeout = randomNum(30001, 60000)
     if (times <= (number-1)*2) {
@@ -66,20 +67,16 @@ function myWithdraws(myHeader, myImei) {
 // myTask(headerAndImei.myHeader2, headerAndImei.myImei2);
 
 //日常刷
-// mylogin(headerAndImei.myHeader1, headerAndImei.myImei1)
-// myTask(headerAndImei.myHeader1, headerAndImei.myImei1)
-// dayTimeout = randomNum(86400000-10800000,86400000+10800000)
-// setInterval(myTask, dayTimeout, headerAndImei.myHeader1, headerAndImei.myImei1)
-//
-// mylogin(headerAndImei.myHeader2, headerAndImei.myImei2)
-// myTask(headerAndImei.myHeader2, headerAndImei.myImei2)
-// dayTimeout = randomNum(86400000-10800000,86400000+10800000)
-// setInterval(myTask, dayTimeout, headerAndImei.myHeader2, headerAndImei.myImei2)
+mylogin(headerAndImei.myHeader1, headerAndImei.myImei1)
+myTask(headerAndImei.myHeader1, headerAndImei.myImei1)
+dayTimeout = randomNum(86400000-10800000,86400000+10800000)
+setInterval(myTask, dayTimeout, headerAndImei.myHeader1, headerAndImei.myImei1)
+
+mylogin(headerAndImei.myHeader2, headerAndImei.myImei2)
+myTask(headerAndImei.myHeader2, headerAndImei.myImei2)
+dayTimeout = randomNum(86400000-10800000,86400000+10800000)
+setInterval(myTask, dayTimeout, headerAndImei.myHeader2, headerAndImei.myImei2)
 
 //无限刷
 // setInterval(task.randCoin,1,headerAndImei.myHeader1, headerAndImei.myImei1, randomNum(15,18))
 // setInterval(task.randCoin,1,headerAndImei.myHeader2, headerAndImei.myImei2, randomNum(15,18))
-
-// task.cardReceiveCoin(headerAndImei.myHeader2, headerAndImei.myImei2)
-
-setTimeout(task.cardReceiveCoin, 10000, headerAndImei.myHeader2, headerAndImei.myImei2)
