@@ -5,14 +5,14 @@ var withdraws = require('./service/withdraws')
 var randomNum = require('./utils/randomNum')
 var getNowFormatDate = require('./utils/getNowFormatDate')
 var headerAndImei = require('./domain/headerAndImei')
-var num, myTimeout, dayTimeout
+var num
 var times = 0
 
-//刷分总次数
+// 刷分总次数
 var number = 500
 
 
-//查询
+// 查询
 function myQuery(myHeader, myImei) {
     query.queryEarningPage(myHeader, myImei) //查询收益详情
     query.queryIndex(myHeader, myImei) //查询账户金币|提现详情
@@ -32,7 +32,7 @@ function mylogin(myHeader, myImei) {
     login.versionIndex(myHeader, myImei)
 }
 
-//任务
+// 任务
 function myTask(myHeader, myImei) {
     times++;
     if (times <= 2) {
@@ -47,36 +47,44 @@ function myTask(myHeader, myImei) {
     if (num == 2) task.randCoin(myHeader,myImei, randomNum(15,18)) //首页随机金币
     if (num == 3) task.cardReceiveCoin(myHeader,myImei) //刮卡奖励
     if (times <= (104-1)*2) task.turntableCoin(myHeader, myImei) //幸运大转盘
-    myTimeout = randomNum(30001, 60000)
     if (times <= (number-1)*2) {
-        setTimeout(myTask, myTimeout, myHeader, myImei)
+        setTimeout(myTask, randomNum(30001, 60000), myHeader, myImei)
     }else {
+        times = 0
         task.chestcoin(myHeader, myImei)
+        myCardReceiveCoin(myHeader, myImei)
     }
     console.log('第' + Math.round(times/2) + '次')
 }
 
-//提现
+// 提现
 function myWithdraws(myHeader, myImei) {
     withdraws.withdrawsConfirm(myHeader, myImei, 100)
 }
 
+// 循环刮卡
+function myCardReceiveCoin(myHeader, myImei) {
+    task.cardReceiveCoin(myHeader,myImei)
+    if (times == 0) {
+        setTimeout(myCardReceiveCoin, randomNum(130001, 160000), myHeader, myImei)
+    }
+}
+
+// 查询
 // myWithdraws(headerAndImei.myHeader2,headerAndImei.myImei2);
 // mylogin(headerAndImei.myHeader2,headerAndImei.myImei2);
 // myQuery(headerAndImei.myHeader2,headerAndImei.myImei2);
 // myTask(headerAndImei.myHeader2, headerAndImei.myImei2);
 
-//日常刷
-// mylogin(headerAndImei.myHeader1, headerAndImei.myImei1)
-// myTask(headerAndImei.myHeader1, headerAndImei.myImei1)
-// dayTimeout = randomNum(86400000-10800000,86400000+10800000)
-// setInterval(myTask, dayTimeout, headerAndImei.myHeader1, headerAndImei.myImei1)
-//
-// mylogin(headerAndImei.myHeader2, headerAndImei.myImei2)
-// myTask(headerAndImei.myHeader2, headerAndImei.myImei2)
-// dayTimeout = randomNum(86400000-10800000,86400000+10800000)
-// setInterval(myTask, dayTimeout, headerAndImei.myHeader2, headerAndImei.myImei2)
+// 日常刷
+mylogin(headerAndImei.myHeader1, headerAndImei.myImei1)
+myTask(headerAndImei.myHeader1, headerAndImei.myImei1)
+setInterval(myTask, randomNum(86400000-10800000,86400000+10800000), headerAndImei.myHeader1, headerAndImei.myImei1)
 
-//无限刷
+mylogin(headerAndImei.myHeader2, headerAndImei.myImei2)
+myTask(headerAndImei.myHeader2, headerAndImei.myImei2)
+setInterval(myTask, randomNum(86400000-10800000,86400000+10800000), headerAndImei.myHeader2, headerAndImei.myImei2)
+
+// 无限刷
 // setInterval(task.randCoin,1,headerAndImei.myHeader1, headerAndImei.myImei1, randomNum(15,18))
 // setInterval(task.randCoin,1,headerAndImei.myHeader2, headerAndImei.myImei2, randomNum(15,18))
