@@ -1,5 +1,5 @@
 var request = require('request');
-var randomNum = require('../utils/randomNum');
+var randomNum = require('../../utils/randomNum');
 
 function Task() {
 
