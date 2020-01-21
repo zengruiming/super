@@ -54,7 +54,7 @@ function myTask(myHeader, myImei) {
         task.chestcoin(myHeader, myImei)
         myCardReceiveCoin(myHeader, myImei)
     }
-    console.log('第' + Math.round(times/2) + '次')
+    console.log('--> 第' + Math.round(times/2) + '次')
 }
 
 // 提现
