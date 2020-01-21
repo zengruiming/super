@@ -5,7 +5,7 @@ var withdraws = require('./service/withdraws')
 var randomNum = require('./utils/randomNum')
 var getNowFormatDate = require('./utils/getNowFormatDate')
 var headerAndImei = require('./domain/headerAndImei')
-var num
+var num, myTimeout, dayTimeout
 var times = 0
 
 // 刷分总次数
@@ -47,8 +47,9 @@ function myTask(myHeader, myImei) {
     if (num == 2) task.randCoin(myHeader,myImei, randomNum(15,18)) //首页随机金币
     if (num == 3) task.cardReceiveCoin(myHeader,myImei) //刮卡奖励
     if (times <= (104-1)*2) task.turntableCoin(myHeader, myImei) //幸运大转盘
+    myTimeout =  randomNum(30001, 60000)
     if (times <= (number-1)*2) {
-        setTimeout(myTask, randomNum(30001, 60000), myHeader, myImei)
+        setTimeout(myTask,myTimeout, myHeader, myImei)
     }else {
         times = 0
         task.chestcoin(myHeader, myImei)
@@ -77,13 +78,15 @@ function myCardReceiveCoin(myHeader, myImei) {
 // myTask(headerAndImei.myHeader2, headerAndImei.myImei2);
 
 // 日常刷
+dayTimeout = randomNum(86400000-10800000,86400000+10800000)
+
 mylogin(headerAndImei.myHeader1, headerAndImei.myImei1)
 myTask(headerAndImei.myHeader1, headerAndImei.myImei1)
-setInterval(myTask, randomNum(86400000-10800000,86400000+10800000), headerAndImei.myHeader1, headerAndImei.myImei1)
+setInterval(myTask, dayTimeout, headerAndImei.myHeader1, headerAndImei.myImei1)
 
 mylogin(headerAndImei.myHeader2, headerAndImei.myImei2)
 myTask(headerAndImei.myHeader2, headerAndImei.myImei2)
-setInterval(myTask, randomNum(86400000-10800000,86400000+10800000), headerAndImei.myHeader2, headerAndImei.myImei2)
+setInterval(myTask, dayTimeout, headerAndImei.myHeader2, headerAndImei.myImei2)
 
 // 无限刷
 // setInterval(task.randCoin,1,headerAndImei.myHeader1, headerAndImei.myImei1, randomNum(15,18))
