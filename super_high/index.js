@@ -96,9 +96,9 @@ setInterval(myTask, dayTimeout, headerAndImei.myHeader2, headerAndImei.myImei2)
 
 
 //趣走
-var j
-var flag = 0;
-var l = 0,m = 0;
+// var j
+// var flag = 0;
+// var l = 0,m = 0;
 
 //趣走
 // function quzouRun() {
