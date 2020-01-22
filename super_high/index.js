@@ -4,7 +4,9 @@ var login = require('./service/zouluzhuan/login')
 var withdraws = require('./service/zouluzhuan/withdraws')
 var randomNum = require('./utils/randomNum')
 var getNowFormatDate = require('./utils/getNowFormatDate')
-var headerAndImei = require('./domain/headerAndImei')
+var headerAndImei = require('./domain/zouluzhuan/headerAndImei')
+var quzouTask = require('./service/quzou/task')
+var quzouHeader = require('./domain/quzou/header')
 var num, myTimeout, dayTimeout
 var times = 0
 
@@ -91,3 +93,50 @@ setInterval(myTask, dayTimeout, headerAndImei.myHeader2, headerAndImei.myImei2)
 // 无限刷
 // setInterval(task.randCoin,1,headerAndImei.myHeader1, headerAndImei.myImei1, randomNum(15,18))
 // setInterval(task.randCoin,1,headerAndImei.myHeader2, headerAndImei.myImei2, randomNum(15,18))
+
+
+//趣走
+var j
+var flag = 0;
+var l = 0,m = 0;
+
+//趣走
+// function quzouRun() {
+//     j = randomNum(1, 4);
+//     if (flag < 2000) {
+//         setTimeout(quzouRun, randomNum(15011, 20000));
+//     } else {
+//         flag = 0;
+//         setTimeout(quzouRun, randomNum(86400000-10800000,86400000+10800000));
+//     }
+//     if (flag <= 10) {
+//         games();
+//         richang();
+//     }
+//     if (j == 1) {
+//         news();
+//     }
+//     if (j == 2) {
+//         videos();
+//     }
+//     if (j == 3) {
+//         game1();
+//     }
+//     if (j == 4) {
+//         game2();
+//     }
+// }
+
+//整点领红包
+// function zdRun() {
+//     clearInterval(k);
+//     m = randomNum(1500000, 2100000);
+//     k = setInterval("zdRun()", m);
+//     zhengDian();
+// }
+//
+// i = setInterval(run, l);
+//
+// k = setInterval(zdRun, m);
+
+// quzouTask.gameAll(quzouHeader.appHeader,3)

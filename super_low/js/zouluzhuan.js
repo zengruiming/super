@@ -1,4 +1,4 @@
-var headerAndImei = require('super_high/domain/headerAndImei.js')
+var headerAndImei = require('../../super_high/domain/zouluzhuan/headerAndImei.js')
 
 //首页金币
 function zHome(zCoin) {

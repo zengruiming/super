@@ -1,3 +1,5 @@
+var str2Obj = require('../../utils/str2Obj.js')
+
 function headerAndImei() {
     this.myHeader1 = {
         'Host': 'api.xiaomuyu888.com',

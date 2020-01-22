@@ -157,8 +157,10 @@ function Task() {
                 headers: header,
                 body: 'source=ios&device=ios&num=' + arr[j]
             }, function (error, res, body) {
-                //输出返回的内容
-                console.log('开宝箱:' + body)
+                if (!error && res.statusCode == 200) {
+                    //输出返回的内容
+                    console.log('开宝箱:' + body)
+                }
             })
         }
     }
@@ -173,19 +175,21 @@ function Task() {
             headers: header,
             body: 'device=ios&imei=' + imei + '&source=ios&version=1.2.5'
         }, function (error, res, body) {
-            //输出返回的内容
-            console.log('刮卡:' + JSON.parse(body).data['surplus_numbers'])
-            if (JSON.parse(body).data['surplus_numbers']!=0) {
-                request({
-                    url: 'https://api.xiaomuyu888.com/api/Card/cardReceiveCoin',
-                    method: 'post',
-                    gzip: true,
-                    headers: header,
-                    body: 'coin=' + arr[randomNum(0, 2)] + '&device=ios&id=' + randomNum(2, 20) + '&imei=' + imei + '&is_double=1&source=ios&version=1.2.5'
-                }, function (error, res, body) {
-                    //输出返回的内容
-                    console.log('刮卡奖励:' + body)
-                })
+            if (!error && res.statusCode == 200 && body.indexOf("surplus_numbers") != -1) {
+                //输出返回的内容
+                console.log('刮卡:' + JSON.parse(body).data['surplus_numbers'])
+                if (JSON.parse(body).data['surplus_numbers'] != 0) {
+                    request({
+                        url: 'https://api.xiaomuyu888.com/api/Card/cardReceiveCoin',
+                        method: 'post',
+                        gzip: true,
+                        headers: header,
+                        body: 'coin=' + arr[randomNum(0, 2)] + '&device=ios&id=' + randomNum(2, 20) + '&imei=' + imei + '&is_double=1&source=ios&version=1.2.5'
+                    }, function (error, res, body) {
+                        //输出返回的内容
+                        console.log('刮卡奖励:' + body)
+                    })
+                }
             }
         })
     }
