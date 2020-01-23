@@ -78,58 +78,36 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('领步数:' + body)
+            console.log('领步数1-1:' + body)
+            var resp = JSON.parse(body)
+            if (resp.code == '0' && resp.data.days.length > 0) {
+                var datas = resp.data.days;
+                var recordId = datas[0].recordId + "";
+                var exchangeCurrency = datas[0].expectExchangecurrency + "";
+                var category = datas[0].category + "";
+                var saveDataAry = [];
+                var saveData = {};
+                var data1 = {
+                    "recordId": recordId,
+                    "exchangeCurrency": exchangeCurrency,
+                    "category": category
+                };
+                saveDataAry.push(data1);
+                saveData["exchangeReqs"] = saveDataAry;
+                request({
+                    url: 'https://mobile01.91quzou.com/currency/exchangeCurrency.do',
+                    method: 'POST',
+                    gzip: true,
+                    headers: header,
+                    body: JSON.stringify(saveData)
+                }, function (error, res, body) {
+                    if (!error && res.statusCode == 200) {
+                        console.log('领步数1-2:' + body)
+                    }
+                })
+            }
         }
     })
-    // $.ajax({
-    //     type: "post",
-    //     headers: header,
-    //     url: "https://mobile01.91quzou.com/currency/getExpectExchangeCurrency.do",
-    //     data: {},
-    //     success: function (res) {
-    //         if (res.code == '0' && res.data.days.length > 0) {
-    //             var datas = res.data.days;
-    //             var recordId = datas[0].recordId + "";
-    //             var exchangeCurrency = datas[0].expectExchangecurrency + "";
-    //             var category = datas[0].category + "";
-    //             var saveDataAry = [];
-    //             var saveData = {};
-    //             var data1 = {
-    //                 "recordId": recordId,
-    //                 "exchangeCurrency": exchangeCurrency,
-    //                 "category": category
-    //             };
-    //             saveDataAry.push(data1);
-    //             saveData["exchangeReqs"] = saveDataAry;
-    //             $.ajax({
-    //                 type: "post",
-    //                 headers: {
-    //                     "Host": "mobile01.91quzou.com",
-    //                     "appId": "QUZUOO2C01YTQYOH9Q100207N063H7ES2Z43",
-    //                     "phoneModel": "iPhoneSE",
-    //                     "Accept": "*/*",
-    //                     "Proxy-Connection": "keep-alive",
-    //                     "appName": "QZI",
-    //                     "appVersion": "4.1.0",
-    //                     "source": "1004",
-    //                     "accessToken": "+NEflO3uj02MBMS5Y1lDrWp6h2nk+NkrJvSsGhwGPyfs4wcVLp9cgApfWcz6kQlck+vttQl74CMPo9HibM6F9tPtHGhWTxf0SgaTS0fuBntA0NzEEDZJbQWwD57Capn1p9ey43QoDRqJEhPWJSynhlBINYoWs0Sw9ABu0ZMUSJVatUNmk8Gu7Q==",
-    //                     "Accept-Encoding": "gzip;q=1.0, compress;q=0.5",
-    //                     "Accept-Language": "zh-Hans-CN;q=1.0, en-CN;q=0.9, zh-Hans;q=0.8, en-US;q=0.7, de-CH;q=0.6",
-    //                     "Content-Type": "application/json;charset=UTF-8",
-    //                     "Content-Length": "83",
-    //                     "appMuId": "46C4E2C99C6A423CA1629A08C1D29556",
-    //                     "appMode": "PROD",
-    //                     "User-Agent": "QuZou/4.1.0 (com.sports.quzouvip; build:22; iOS 9.3.2) Alamofire/4.1.0",
-    //                     "appBundleID": "QUZUO_VIP_IOS",
-    //                     "Connection": "keep-alive",
-    //                     "osVersion": "9.3.2"
-    //                 },
-    //                 url: "https://mobile01.91quzou.com/currency/exchangeCurrency.do",
-    //                 data: JSON.stringify(saveData)
-    //             });
-    //         }
-    //     }
-    // });
 
     //戳气球翻倍
     request({
@@ -352,6 +330,20 @@ this.richang = function (header) {
         }
     })
 
+    //分享3
+    request({
+        url: 'https://mobile01.91quzou.com/rebate/qz/task/receive.do',
+        method: 'POST',
+        gzip: true,
+        headers: header,
+        body: unescape('pageType=&taskId=HAPKE6L4&type=1'.trim())
+    }, function (error, res, body) {
+        if (!error && res.statusCode == 200) {
+            //输出返回的内容
+            console.log('分享3:' + body)
+        }
+    })
+
     //步数奖励1
     request({
         url: 'https://mobile01.91quzou.com/rebate/qz/task/receive.do',
@@ -436,6 +428,20 @@ this.richang = function (header) {
         }
     })
 
+    //步数奖励6
+    request({
+        url: 'https://mobile01.91quzou.com/rebate/qz/task/receive.do',
+        method: 'POST',
+        gzip: true,
+        headers: header,
+        body: unescape('pageType=&taskId=FCLTQOVE&type=1'.trim())
+    }, function (error, res, body) {
+        if (!error && res.statusCode == 200) {
+            //输出返回的内容
+            console.log('步数奖励6:' + body)
+        }
+    })
+
     //偷步数1-1
     request({
         url: 'https://mobile01.91quzou.com/v4/huntStealWalk/huntSeeEncourageVideoCallback.do',
@@ -450,24 +456,33 @@ this.richang = function (header) {
     })
 
     //偷步数1-2
-    // $.ajax({
-    //     type: "post",
-    //     headers: header,
-    //     url: "https://mobile01.91quzou.com/v4/huntStealWalk/huntFindStolenPerson.do",
-    //     data: {},
-    //     success: function (res) {
-    //         if (res.code == '0' && res.data.stolenPersonId.length > 0) {
-    //             var numTou = randomNum(843, 1000);
-    //             $.ajax({
-    //                 type: "post",
-    //                 headers: header2,
-    //                 url: "https://mobile01.91quzou.com/v4/huntStealWalk/huntStealWalk.do",
-    //                 data: {"stealWalk": `${numTou}`, "stolenPersonId": `${res.data.stolenPersonId}`}
-    //             });
-    //         }
-    //     }
-    // });
-
+    request({
+        url: 'https://mobile01.91quzou.com/v4/huntStealWalk/huntFindStolenPerson.do',
+        method: 'POST',
+        gzip: true,
+        headers: header,
+    }, function (error, res, body) {
+        if (!error && res.statusCode == 200) {
+            //输出返回的内容
+            console.log('偷步数1-2-1:' + body)
+            var resp = JSON.parse(body)
+            if (resp.code == '0' && resp.data.stolenPersonId.length > 0) {
+                var numTou = randomNum(843, 1000);
+                request({
+                    url: 'https://mobile01.91quzou.com/v4/huntStealWalk/huntStealWalk.do',
+                    method: 'POST',
+                    gzip: true,
+                    headers: header,
+                    body: 'stealWalk='+numTou+'&stolenPersonId='+resp.data.stolenPersonId
+                }, function (error, res, body) {
+                    if (!error && res.statusCode == 200) {
+                        //输出返回的内容
+                        console.log('偷步数1-2-2:' + body)
+                    }
+                })
+            }
+        }
+    })
 }
 
 this.wechatShare = function (header) {
@@ -526,7 +541,7 @@ this.games = function (header) {
         method: 'POST',
         gzip: true,
         headers: header,
-        body: unescape('score='+score+'&from=null&sign='+sign+'&timestamp='+time.trim())
+        body: unescape('score='+score+'&from=null&sign='+sign+'&timestamp='+time)
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
@@ -553,7 +568,7 @@ this.news = function (header) {
                 method: 'POST',
                 gzip: true,
                 headers: header,
-                body: unescape('type=1&id=20191219193846584'+ randomNum(100, 999)+'&time=1573175783661&encode=a28ddd2060945763d08f2213b7afa8ff'.trim())
+                body: unescape('encode=e487dbaa1c8f824323c59897b8ad7a06&id=20200123112256700'+randomNum(100, 999)+'&time=1579749656212&type=1'.trim())
             }, function (error, res, body) {
                 if (!error && res.statusCode == 200) {
                     //输出返回的内容
@@ -702,7 +717,7 @@ this.zhengDian = function (header) {
                         if (!error && res.statusCode == 200) {
                             //输出返回的内容
                             console.log('整点领红包-3:' + body)
-                            this.richang();
+                            // this.richang();
                         }
                     })
                 }

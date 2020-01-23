@@ -109,10 +109,10 @@ function Task() {
             headers: header,
             body: 'coin=' + coin + '&device=ios&double=1&imei=' + imei + '&source=ios&version=1.2.5'
         }, function (error, res, body) {
-            if (!error && res.statusCode == 200) {
+/*            if (!error && res.statusCode == 200) {
                 //输出返回的内容
                 console.log('首页随机金币:' + body)
-            }
+            }*/
         })
     }
 

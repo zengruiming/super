@@ -36,7 +36,6 @@ function QuzouHeader() {
         'Accept-Encoding: gzip;q=1.0, compress;q=0.5\n' +
         'Accept-Language: zh-Hans-CN;q=1.0, en-CN;q=0.9, zh-Hans;q=0.8, en-US;q=0.7, de-CH;q=0.6\n' +
         'Content-Type: application/x-www-form-urlencoded; charset=utf-8\n' +
-        'Content-Length: 302\n' +
         'appMuId: 46C4E2C99C6A423CA1629A08C1D29556\n' +
         'appMode: PROD\n' +
         'User-Agent: \n' +

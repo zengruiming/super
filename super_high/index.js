@@ -1,3 +1,4 @@
+var request = require('request');
 var task = require('./service/zouluzhuan/task')
 var query = require('./service/zouluzhuan/query')
 var login = require('./service/zouluzhuan/login')
@@ -43,21 +44,21 @@ function myTask(myHeader, myImei) {
     }
     if (times <= 6) task.advertisementCount(myHeader, myImei) //步数1-1
     if (times == 8) task.exchangedCoin(myHeader, myImei, randomNum(10001, 20001)) //步数1-2
-    num = randomNum(0,3)
-    if (num == 0) task.newsVideoCoin(myHeader,myImei) //刷新闻视频
-    if (num == 1) task.videoCoin(myHeader,myImei) //看推荐视频
-    if (num == 2) task.randCoin(myHeader,myImei, randomNum(15,18)) //首页随机金币
-    if (num == 3) task.cardReceiveCoin(myHeader,myImei) //刮卡奖励
-    if (times <= (104-1)*2) task.turntableCoin(myHeader, myImei) //幸运大转盘
-    myTimeout =  randomNum(30001, 60000)
-    if (times <= (number-1)*2) {
-        setTimeout(myTask,myTimeout, myHeader, myImei)
-    }else {
+    num = randomNum(0, 3)
+    if (num == 0) task.newsVideoCoin(myHeader, myImei) //刷新闻视频
+    if (num == 1) task.videoCoin(myHeader, myImei) //看推荐视频
+    if (num == 2) task.randCoin(myHeader, myImei, randomNum(15, 18)) //首页随机金币
+    if (num == 3) task.cardReceiveCoin(myHeader, myImei) //刮卡奖励
+    if (times <= (104 - 1) * 2) task.turntableCoin(myHeader, myImei) //幸运大转盘
+    myTimeout = randomNum(30001, 60000)
+    if (times <= (number - 1) * 2) {
+        setTimeout(myTask, myTimeout, myHeader, myImei)
+    } else {
         times = 0
         task.chestcoin(myHeader, myImei)
         myCardReceiveCoin(myHeader, myImei)
     }
-    console.log('--> 第' + Math.round(times/2) + '次')
+    console.log('--> 第' + Math.round(times / 2) + '次')
 }
 
 // 提现
@@ -67,7 +68,7 @@ function myWithdraws(myHeader, myImei) {
 
 // 循环刮卡
 function myCardReceiveCoin(myHeader, myImei) {
-    task.cardReceiveCoin(myHeader,myImei)
+    task.cardReceiveCoin(myHeader, myImei)
     if (times == 0) {
         setTimeout(myCardReceiveCoin, randomNum(130001, 160000), myHeader, myImei)
     }
@@ -91,52 +92,49 @@ myTask(headerAndImei.myHeader2, headerAndImei.myImei2)
 setInterval(myTask, dayTimeout, headerAndImei.myHeader2, headerAndImei.myImei2)
 
 // 无限刷
-// setInterval(task.randCoin,1,headerAndImei.myHeader1, headerAndImei.myImei1, randomNum(15,18))
-// setInterval(task.randCoin,1,headerAndImei.myHeader2, headerAndImei.myImei2, randomNum(15,18))
-
-
-//趣走
-// var j
-// var flag = 0;
-// var l = 0,m = 0;
-
-//趣走
-// function quzouRun() {
-//     j = randomNum(1, 4);
-//     if (flag < 2000) {
-//         setTimeout(quzouRun, randomNum(15011, 20000));
-//     } else {
-//         flag = 0;
-//         setTimeout(quzouRun, randomNum(86400000-10800000,86400000+10800000));
-//     }
-//     if (flag <= 10) {
-//         games();
-//         richang();
-//     }
-//     if (j == 1) {
-//         news();
-//     }
-//     if (j == 2) {
-//         videos();
-//     }
-//     if (j == 3) {
-//         game1();
-//     }
-//     if (j == 4) {
-//         game2();
-//     }
+// for (var i=0;i<1000;i++) {
+    // setInterval(task.randCoin,1,headerAndImei.myHeader1, headerAndImei.myImei1, randomNum(15,18))
+    // setInterval(task.randCoin,1,headerAndImei.myHeader2, headerAndImei.myImei2, randomNum(15,18))
 // }
+
+
+//趣走
+var i,j
+var flag = 0;
+
+function quzouRun(header) {
+    i = randomNum(1, 4);
+    j = [3,5]
+    if (flag < 2000) {
+        setTimeout(quzouRun, randomNum(15011, 20000),header);
+    } else {
+        flag = 0;
+    }
+    if (flag <= 10) {
+        quzouTask.games(header);
+        quzouTask.richang(header);
+    }
+    if (i == 1) {
+        quzouTask.news(header);
+    }
+    if (i == 2) {
+        quzouTask.videos(header);
+    }
+    if (i == 3) {
+        quzouTask.gameAll(header,j[randomNum(0,1)]);
+    }
+    if (i == 4) {
+        quzouTask.wechatShare(quzouHeader.wechatHeader)
+    }
+}
 
 //整点领红包
-// function zdRun() {
-//     clearInterval(k);
-//     m = randomNum(1500000, 2100000);
-//     k = setInterval("zdRun()", m);
-//     zhengDian();
-// }
-//
-// i = setInterval(run, l);
-//
-// k = setInterval(zdRun, m);
+function zdRun(header) {
+    quzouTask.zhengDian(header);
+    setTimeout(zdRun, randomNum(1500000, 2100000),header);
+}
 
-// quzouTask.gameAll(quzouHeader.appHeader,3)
+var myDayTimeout = randomNum(86400000-10800000,86400000+10800000)
+quzouRun(quzouHeader.appHeader)
+setInterval(quzouRun, myDayTimeout, quzouHeader.appHeader)
+zdRun(quzouHeader.appHeader)
