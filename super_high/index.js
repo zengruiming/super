@@ -103,7 +103,7 @@ var i,j
 var flag = 0;
 
 function quzouRun(header) {
-    i = randomNum(1, 4);
+    i = randomNum(2, 4);
     j = [3,5]
     if (flag < 2000) {
         setTimeout(quzouRun, randomNum(15011, 20000),header);
