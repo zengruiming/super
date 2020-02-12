@@ -8,11 +8,7 @@ var getNowFormatDate = require('./utils/getNowFormatDate')
 var headerAndImei = require('./domain/zouluzhuan/headerAndImei')
 var quzouTask = require('./service/quzou/task')
 var quzouHeader = require('./domain/quzou/header')
-var num, myTimeout, dayTimeout
-var times = 0
-
-// 刷分总次数
-var number = 500
+var num
 
 
 // 查询
@@ -36,7 +32,7 @@ function mylogin(myHeader, myImei) {
 }
 
 // 任务
-function myTask(myHeader, myImei) {
+function myTask(myHeader, myImei, times) {
     times++;
     if (times <= 2) {
         task.signCoin(myHeader, myImei)//签到
@@ -49,16 +45,13 @@ function myTask(myHeader, myImei) {
     if (num == 1) task.videoCoin(myHeader, myImei) //看推荐视频
     if (num == 2) task.randCoin(myHeader, myImei, randomNum(15, 18)) //首页随机金币
     if (num == 3) task.cardReceiveCoin(myHeader, myImei) //刮卡奖励
-    if (times <= (104 - 1) * 2) task.turntableCoin(myHeader, myImei) //幸运大转盘
-    myTimeout = randomNum(30001, 60000)
-    if (times <= (number - 1) * 2) {
-        setTimeout(myTask, myTimeout, myHeader, myImei)
+    if (times <= 100) task.turntableCoin(myHeader, myImei) //幸运大转盘
+    if (times < 1) {
+        setTimeout(myTask, randomNum(30001, 60000), myHeader, myImei, times)
     } else {
-        times = 0
         task.chestcoin(myHeader, myImei)
-        myCardReceiveCoin(myHeader, myImei)
     }
-    console.log('--> 第' + Math.round(times / 2) + '次')
+    console.log('--> 第' + times + '次')
 }
 
 // 提现
@@ -81,15 +74,12 @@ function myCardReceiveCoin(myHeader, myImei) {
 // myTask(headerAndImei.myHeader2, headerAndImei.myImei2);
 
 // 日常刷
-dayTimeout = randomNum(86400000-10800000,86400000+10800000)
 
 mylogin(headerAndImei.myHeader1, headerAndImei.myImei1)
-myTask(headerAndImei.myHeader1, headerAndImei.myImei1)
-setInterval(myTask, dayTimeout, headerAndImei.myHeader1, headerAndImei.myImei1)
+setTimeout(myTask, 0, headerAndImei.myHeader1, headerAndImei.myImei1, 0)
 
 mylogin(headerAndImei.myHeader2, headerAndImei.myImei2)
-myTask(headerAndImei.myHeader2, headerAndImei.myImei2)
-setInterval(myTask, dayTimeout, headerAndImei.myHeader2, headerAndImei.myImei2)
+setTimeout(myTask, 0, headerAndImei.myHeader2, headerAndImei.myImei2, 0)
 
 // 无限刷
 // for (var i=0;i<1000;i++) {
@@ -134,7 +124,5 @@ function zdRun(header) {
     setTimeout(zdRun, randomNum(1500000, 2100000),header);
 }
 
-var myDayTimeout = randomNum(86400000-10800000,86400000+10800000)
-quzouRun(quzouHeader.appHeader)
-setInterval(quzouRun, myDayTimeout, quzouHeader.appHeader)
-zdRun(quzouHeader.appHeader)
+// setTimeout(quzouRun, randomNum(3600000,7200000), quzouHeader.appHeader)
+// zdRun(quzouHeader.appHeader)
