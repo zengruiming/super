@@ -41,13 +41,13 @@ function myTask(myHeader, myImei, times) {
     }
     if (times <= 6) task.advertisementCount(myHeader, myImei) //步数1-1
     if (times == 8) task.exchangedCoin(myHeader, myImei, randomNum(10001, 20001)) //步数1-2
-    if (times <= 100) {
+    if (times <= 15) {
         task.turntableCoin(myHeader, myImei) //幸运大转盘
         setTimeout(myTask, randomNum(30001, 60000), myHeader, myImei, times)
     } else {
         task.chestcoin(myHeader, myImei)
     }
-    console.log('--> 第' + times + '次')
+    // console.log('--> 第' + times + '次')
 }
 
 // 提现
@@ -77,13 +77,13 @@ function myIntervalCoin(myHeader, myImei, times) {
 // 日常刷
 var t1 = schedule.scheduleJob('0 0 8,9,13,14,20,21,22,23 * * ?', function () {
     mylogin(headerAndImei.myHeader1, headerAndImei.myImei1)
-    setTimeout(myTask, randomNum(3600000, 7200000), headerAndImei.myHeader1, headerAndImei.myImei1, 0)
+    setTimeout(myTask, randomNum(300000, 600000), headerAndImei.myHeader1, headerAndImei.myImei1, 0)
     setTimeout(myIntervalCoin, randomNum(300000, 600000), headerAndImei.myHeader1, headerAndImei.myImei1, 0)
 })
 
 var t2 = schedule.scheduleJob('0 0 7,8,11,12,16,17,18,23 * * ?', function () {
     mylogin(headerAndImei.myHeader2, headerAndImei.myImei2)
-    setTimeout(myTask, randomNum(3600000, 7200000), headerAndImei.myHeader2, headerAndImei.myImei2, 0)
+    setTimeout(myTask, randomNum(300000, 600000), headerAndImei.myHeader2, headerAndImei.myImei2, 0)
     setTimeout(myIntervalCoin, randomNum(300000, 600000), headerAndImei.myHeader2, headerAndImei.myImei2, 0)
 })
 
