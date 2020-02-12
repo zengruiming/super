@@ -1,4 +1,5 @@
-var request = require('request');
+var request = require('request')
+var schedule = require('node-schedule')
 var task = require('./service/zouluzhuan/task')
 var query = require('./service/zouluzhuan/query')
 var login = require('./service/zouluzhuan/login')
@@ -40,13 +41,8 @@ function myTask(myHeader, myImei, times) {
     }
     if (times <= 6) task.advertisementCount(myHeader, myImei) //步数1-1
     if (times == 8) task.exchangedCoin(myHeader, myImei, randomNum(10001, 20001)) //步数1-2
-    num = randomNum(0, 3)
-    if (num == 0) task.newsVideoCoin(myHeader, myImei) //刷新闻视频
-    if (num == 1) task.videoCoin(myHeader, myImei) //看推荐视频
-    if (num == 2) task.randCoin(myHeader, myImei, randomNum(15, 18)) //首页随机金币
-    if (num == 3) task.cardReceiveCoin(myHeader, myImei) //刮卡奖励
-    if (times <= 100) task.turntableCoin(myHeader, myImei) //幸运大转盘
-    if (times < 1) {
+    if (times <= 100) {
+        task.turntableCoin(myHeader, myImei) //幸运大转盘
         setTimeout(myTask, randomNum(30001, 60000), myHeader, myImei, times)
     } else {
         task.chestcoin(myHeader, myImei)
@@ -59,11 +55,16 @@ function myWithdraws(myHeader, myImei) {
     withdraws.withdrawsConfirm(myHeader, myImei, 100)
 }
 
-// 循环刮卡
-function myCardReceiveCoin(myHeader, myImei) {
-    task.cardReceiveCoin(myHeader, myImei)
-    if (times == 0) {
-        setTimeout(myCardReceiveCoin, randomNum(130001, 160000), myHeader, myImei)
+// 循环刷分
+function myIntervalCoin(myHeader, myImei, times) {
+    times++;
+    num = randomNum(0, 2)
+    if (num == 0) task.newsVideoCoin(myHeader, myImei) //刷新闻视频
+    if (num == 1) task.videoCoin(myHeader, myImei) //看推荐视频
+    if (num == 2) task.cardReceiveCoin(myHeader, myImei) //刮卡奖励
+    if (num == 3) task.randCoin(myHeader, myImei, randomNum(15, 18)) //首页随机金币
+    if (times <= 60) {
+        setTimeout(myIntervalCoin, randomNum(30001, 40000), myHeader, myImei, times)
     }
 }
 
@@ -73,34 +74,38 @@ function myCardReceiveCoin(myHeader, myImei) {
 // myQuery(headerAndImei.myHeader2,headerAndImei.myImei2);
 // myTask(headerAndImei.myHeader2, headerAndImei.myImei2);
 
-// 日常刷
+// 日常刷1
+var t1 = schedule.scheduleJob('0 0 8,9,13,14,20,21,22,23 * * ?', function () {
+    mylogin(headerAndImei.myHeader1, headerAndImei.myImei1)
+    setTimeout(myTask, randomNum(3600000, 7200000), headerAndImei.myHeader1, headerAndImei.myImei1, 0)
+    setTimeout(myIntervalCoin, randomNum(300000, 600000), headerAndImei.myHeader1, headerAndImei.myImei1, 0)
+})
 
-mylogin(headerAndImei.myHeader1, headerAndImei.myImei1)
-setTimeout(myTask, 0, headerAndImei.myHeader1, headerAndImei.myImei1, 0)
-
-mylogin(headerAndImei.myHeader2, headerAndImei.myImei2)
-setTimeout(myTask, 0, headerAndImei.myHeader2, headerAndImei.myImei2, 0)
+// 日常刷2
+var t2 = schedule.scheduleJob('0 0 7,8,11,12,16,17,18,23 * * ?', function () {
+    mylogin(headerAndImei.myHeader2, headerAndImei.myImei2)
+    setTimeout(myTask, randomNum(3600000, 7200000), headerAndImei.myHeader2, headerAndImei.myImei2, 0)
+    setTimeout(myIntervalCoin, randomNum(300000, 600000), headerAndImei.myHeader2, headerAndImei.myImei2, 0)
+})
 
 // 无限刷
 // for (var i=0;i<1000;i++) {
-    // setInterval(task.randCoin,1,headerAndImei.myHeader1, headerAndImei.myImei1, randomNum(15,18))
-    // setInterval(task.randCoin,1,headerAndImei.myHeader2, headerAndImei.myImei2, randomNum(15,18))
+// setInterval(task.randCoin,1,headerAndImei.myHeader1, headerAndImei.myImei1, randomNum(15,18))
+// setInterval(task.randCoin,1,headerAndImei.myHeader2, headerAndImei.myImei2, randomNum(15,18))
 // }
 
 
 //趣走
-var i,j
-var flag = 0;
+var i, j
 
-function quzouRun(header) {
+function quzouRun(header, times) {
+    times++
     i = randomNum(2, 4);
-    j = [3,5]
-    if (flag < 2000) {
-        setTimeout(quzouRun, randomNum(15011, 20000),header);
-    } else {
-        flag = 0;
+    j = [3, 5]
+    if (times < 160) {
+        setTimeout(quzouRun, randomNum(15011, 20000), header, times);
     }
-    if (flag <= 10) {
+    if (times <= 10) {
         quzouTask.games(header);
         quzouTask.richang(header);
     }
@@ -111,7 +116,7 @@ function quzouRun(header) {
         quzouTask.videos(header);
     }
     if (i == 3) {
-        quzouTask.gameAll(header,j[randomNum(0,1)]);
+        quzouTask.gameAll(header, j[randomNum(0, 1)]);
     }
     if (i == 4) {
         quzouTask.wechatShare(quzouHeader.wechatHeader)
@@ -119,10 +124,11 @@ function quzouRun(header) {
 }
 
 //整点领红包
-function zdRun(header) {
-    quzouTask.zhengDian(header);
-    setTimeout(zdRun, randomNum(1500000, 2100000),header);
-}
+var t3 = schedule.scheduleJob('0 0 * * * ?', function () {
+    setTimeout(quzouTask.zhengDian, randomNum(0, 3000000), quzouHeader.appHeader);
+})
 
-// setTimeout(quzouRun, randomNum(3600000,7200000), quzouHeader.appHeader)
-// zdRun(quzouHeader.appHeader)
+// 日常刷
+var t4 = schedule.scheduleJob('0 0 8,9,13,14,20,21,22,23 * * ?', function () {
+    setTimeout(quzouRun, randomNum(300000, 600000), quzouHeader.appHeader, 0)
+})
