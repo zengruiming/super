@@ -24,7 +24,7 @@ function mylogin(myHeader, myImei) {
     login.memberIndex(myHeader, myImei)
     login.homeTab(myHeader, myImei)
     login.memberIndex(myHeader, '00322add0a8252f3f6c7a9a134d47df9af87e821')
-    login.updateUmengDeviceToken(myHeader, myImei, '2c40fa2a2236163a78ca2bd5f8a377a142f950fae79f86e54d310d92b80bdb02')
+    // login.updateUmengDeviceToken(myHeader, myImei, '2c40fa2a2236163a78ca2bd5f8a377a142f950fae79f86e54d310d92b80bdb02')
     login.newAdControl(myHeader, myImei, 'xinxiliu')
     login.homeTimestamp(myHeader, myImei)
     login.homeStep(myHeader, myImei, getNowFormatDate())
