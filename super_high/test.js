@@ -10,4 +10,4 @@ var headerAndImei = require('./domain/zouluzhuan/headerAndImei')
 var quzouTask = require('./service/quzou/task')
 var quzouHeader = require('./domain/quzou/header')
 
-task.randCoin(headerAndImei.myHeader1, headerAndImei.myImei1, randomNum(15, 18))
+login.updateUmengDeviceToken(headerAndImei.myHeader1, headerAndImei.myImei1, '1a70fa2a2234363a78ca2ad5f8a377a142f951fae79f86e54d310d92b81bda11')
