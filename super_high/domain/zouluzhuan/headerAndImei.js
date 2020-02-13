@@ -1,4 +1,4 @@
-var str2Obj = require('../../utils/str2Obj.js')
+var version = require('./version')
 
 function headerAndImei() {
     this.myHeader1 = {
@@ -8,7 +8,7 @@ function headerAndImei() {
         'Connection': 'keep-alive',
         'Proxy-Connection': 'keep-alive',
         'Accept': '*/*',
-        'User-Agent': 'YLZ/1.2.5 (iPhone; iOS 9.3.2; Scale/2.00)',
+        'User-Agent': 'YLZ/' + version.myVersion + ' (iPhone; iOS 9.3.2; Scale/2.00)',
         'Accept-Language': 'zh-Hans-CN;q=1, en-CN;q=0.9, zh-Hans;q=0.8, en-US;q=0.7, de-CH;q=0.6',
         'Accept-Encoding': 'gzip, deflate'
     };
@@ -20,7 +20,7 @@ function headerAndImei() {
         'Cookie': 'PHPSESSID=2448d3c451dc00484d8b04f09eb488f5; CNZZDATA1277228569=1480331940-1579233718-%7C1579244524; UM_distinctid=16fb1d236423e3-0583327f76e936-724c1451-2c600-16fb1d23643271',
         'Connection': 'keep-alive',
         'Accept': '*/*',
-        'User-Agent': 'YLZ/1.2.5 (iPhone; iOS 13.3; Scale/2.00)',
+        'User-Agent': 'YLZ/' + version.myVersion + ' (iPhone; iOS 13.3; Scale/2.00)',
         'Accept-Language': 'zh-Hans-CN;q=1',
         'Accept-Encoding': 'gzip, deflate, br'
     };

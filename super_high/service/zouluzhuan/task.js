@@ -1,3 +1,4 @@
+var version = require('../../domain/zouluzhuan/version')
 var request = require('request');
 var randomNum = require('../../utils/randomNum');
 
@@ -10,7 +11,7 @@ function Task() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei=' + imei + '&source=ios&version=1.2.5'
+            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -26,7 +27,7 @@ function Task() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei=' + imei + '&source=ios&version=1.2.5'
+            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -42,7 +43,7 @@ function Task() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'ad_type=tengxun&device=ios&imei=' + imei + '&source=ios&version=1.2.5'
+            body: 'ad_type=tengxun&device=ios&imei=' + imei + '&source=ios&version=' + version.myVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -58,7 +59,7 @@ function Task() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei=' + imei + '&source=ios&step=' + num + '&version=1.2.5'
+            body: 'device=ios&imei=' + imei + '&source=ios&step=' + num + '&version=' + version.myVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -74,7 +75,7 @@ function Task() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei=' + imei + '&source=ios&version=1.2.5'
+            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -90,7 +91,7 @@ function Task() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei=' + imei + '&source=ios&version=1.2.5'
+            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -107,7 +108,7 @@ function Task() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'coin=' + coin + '&device=ios&double=1&imei=' + imei + '&source=ios&version=1.2.5'
+            body: 'coin=' + coin + '&device=ios&double=1&imei=' + imei + '&source=ios&version=' + version.myVersion
         }, function (error, res, body) {
 /*            if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -120,7 +121,7 @@ function Task() {
 //幸运大转盘
     this.turntableCoin = function (header, imei) {
         request({
-            url: 'http://api.xiaomuyu888.com/api/turntable/turntableCoin?imei=' + imei + '&source=ios&device=ios&version=1.2.5',
+            url: 'http://api.xiaomuyu888.com/api/turntable/turntableCoin?imei=' + imei + '&source=ios&device=ios&version=' + version.myVersion,
             method: 'get',
             gzip: true,
             headers: header,
@@ -173,7 +174,7 @@ function Task() {
             method: 'post',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei=' + imei + '&source=ios&version=1.2.5'
+            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200 && body.indexOf("surplus_numbers") != -1) {
                 //输出返回的内容
@@ -184,7 +185,7 @@ function Task() {
                         method: 'post',
                         gzip: true,
                         headers: header,
-                        body: 'coin=' + arr[randomNum(0, 2)] + '&device=ios&id=' + randomNum(2, 20) + '&imei=' + imei + '&is_double=1&source=ios&version=1.2.5'
+                        body: 'coin=' + arr[randomNum(0, 2)] + '&device=ios&id=' + randomNum(2, 20) + '&imei=' + imei + '&is_double=1&source=ios&version=' + version.myVersion
                     }, function (error, res, body) {
                         //输出返回的内容
                         console.log('刮卡奖励:' + body)

@@ -1,5 +1,13 @@
-var schedule = require('node-schedule');
+var request = require('request')
+var schedule = require('node-schedule')
+var task = require('./service/zouluzhuan/task')
+var query = require('./service/zouluzhuan/query')
+var login = require('./service/zouluzhuan/login')
+var withdraws = require('./service/zouluzhuan/withdraws')
+var randomNum = require('./utils/randomNum')
+var getNowFormatDate = require('./utils/getNowFormatDate')
+var headerAndImei = require('./domain/zouluzhuan/headerAndImei')
+var quzouTask = require('./service/quzou/task')
+var quzouHeader = require('./domain/quzou/header')
 
-var j = schedule.scheduleJob('14 * * * * ?', function(){
-    console.log('The answer to life, the universe, and everything!');
-});
+task.randCoin(headerAndImei.myHeader1, headerAndImei.myImei1, randomNum(15, 18))

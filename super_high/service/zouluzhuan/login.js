@@ -1,3 +1,4 @@
+var version = require('../../domain/zouluzhuan/version')
 /**
  * @Description: 登录
  */
@@ -13,7 +14,7 @@ function Login() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'date='+data+'&device=ios&imei='+imei+'&source=ios&version=1.2.5'
+            body: 'date='+data+'&device=ios&imei='+imei+'&source=ios&version=' + version.myVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -29,7 +30,7 @@ function Login() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei='+imei+'&source=ios&version=1.2.5'
+            body: 'device=ios&imei='+imei+'&source=ios&version=' + version.myVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -45,7 +46,7 @@ function Login() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei='+imei+'&source=ios&version=1.2.5'
+            body: 'device=ios&imei='+imei+'&source=ios&version=' + version.myVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -61,7 +62,7 @@ function Login() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&device_tokens='+tokens+'&imei='+imei+'&source=ios&version=1.2.5'
+            body: 'device=ios&device_tokens='+tokens+'&imei='+imei+'&source=ios&version=' + version.myVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -77,7 +78,7 @@ function Login() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei='+imei+'&source=ios&type='+type+'&version=1.2.5'
+            body: 'device=ios&imei='+imei+'&source=ios&type='+type+'&version=' + version.myVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -93,7 +94,7 @@ function Login() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei='+imei+'&source=ios&version=1.2.5'
+            body: 'device=ios&imei='+imei+'&source=ios&version=' + version.myVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -109,7 +110,7 @@ function Login() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei='+imei+'&source=ios&version=1.2.5&version_code=1.2.5&version_device=2'
+            body: 'device=ios&imei='+imei+'&source=ios&version=' + version.myVersion + '&version_code=' + version.myVersion + '&version_device=2'
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容

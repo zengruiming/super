@@ -63,7 +63,7 @@ function myIntervalCoin(myHeader, myImei, times) {
     if (num == 1) task.videoCoin(myHeader, myImei) //看推荐视频
     if (num == 2) task.cardReceiveCoin(myHeader, myImei) //刮卡奖励
     if (num == 3) task.randCoin(myHeader, myImei, randomNum(15, 18)) //首页随机金币
-    if (times <= 60) {
+    if (times <= 50) {
         setTimeout(myIntervalCoin, randomNum(30001, 40000), myHeader, myImei, times)
     }
 }
