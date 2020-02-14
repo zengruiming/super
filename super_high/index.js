@@ -58,11 +58,11 @@ function myWithdraws(myHeader, myImei) {
 // 循环刷分
 function myIntervalCoin(myHeader, myImei, times) {
     times++;
-    num = randomNum(0, 2)
+    num = randomNum(0, 3)
     if (num == 0) task.newsVideoCoin(myHeader, myImei) //刷新闻视频
     if (num == 1) task.videoCoin(myHeader, myImei) //看推荐视频
     if (num == 2) task.cardReceiveCoin(myHeader, myImei) //刮卡奖励
-    if (num == 3) task.randCoin(myHeader, myImei, randomNum(15, 18)) //首页随机金币
+    if (num == 3 && times % 2 == 1) task.randCoin(myHeader, myImei, randomNum(15, 18)) //首页随机金币
     if (times <= 50) {
         setTimeout(myIntervalCoin, randomNum(30001, 40000), myHeader, myImei, times)
     }
