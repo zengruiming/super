@@ -77,14 +77,14 @@ function myIntervalCoin(myHeader, myImei, times) {
 // 日常刷
 var t1 = schedule.scheduleJob('0 0 8,9,13,14,20,21,22,23 * * ?', function () {
     mylogin(headerAndImei.myHeader1, headerAndImei.myImei1)
-    setTimeout(myTask, randomNum(300000, 600000), headerAndImei.myHeader1, headerAndImei.myImei1, 0)
-    setTimeout(myIntervalCoin, randomNum(300000, 600000), headerAndImei.myHeader1, headerAndImei.myImei1, 0)
+    setTimeout(myTask, randomNum(300000, 1200000), headerAndImei.myHeader1, headerAndImei.myImei1, 0)
+    setTimeout(myIntervalCoin, randomNum(300000, 1200000), headerAndImei.myHeader1, headerAndImei.myImei1, 0)
 })
 
 var t2 = schedule.scheduleJob('0 0 7,8,11,12,16,17,18,23 * * ?', function () {
     mylogin(headerAndImei.myHeader2, headerAndImei.myImei2)
-    setTimeout(myTask, randomNum(300000, 600000), headerAndImei.myHeader2, headerAndImei.myImei2, 0)
-    setTimeout(myIntervalCoin, randomNum(300000, 600000), headerAndImei.myHeader2, headerAndImei.myImei2, 0)
+    setTimeout(myTask, randomNum(300000, 1200000), headerAndImei.myHeader2, headerAndImei.myImei2, 0)
+    setTimeout(myIntervalCoin, randomNum(300000, 1200000), headerAndImei.myHeader2, headerAndImei.myImei2, 0)
 })
 
 // 无限刷
