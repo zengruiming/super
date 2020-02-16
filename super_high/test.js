@@ -10,5 +10,5 @@ var headerAndImei = require('./domain/zouluzhuan/headerAndImei')
 var quzouTask = require('./service/quzou/task')
 var quzouHeader = require('./domain/quzou/header')
 
-login.updateUmengDeviceToken(headerAndImei.myHeader1, headerAndImei.myImei1, 'bc40fa2a2236163a78ca2bd5f8a377a1f2f950fae79f86e54d310d92b80bdf03')
-// login.updateUmengDeviceToken(headerAndImei.myHeader2, headerAndImei.myImei2, '2c40fa2a2236163a78ca2bd5f8a377a142f950fae79f86e54d310d92b80bdb02')
+// login.updateUmengDeviceToken(headerAndImei.myHeader1, headerAndImei.myImei1, 'bc40fa2a2236163a78ca2bd5f8a377a1f2f950fae79f86e54d310d92b80bdf03')
+login.updateUmengDeviceToken(headerAndImei.myHeader2, headerAndImei.myImei2, 'c3d1a3fa6145227d76ba3bd6d6a357a242f330f2e78d82c24de12c76b38c3612')
