@@ -11,7 +11,7 @@ function IosTask() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myVersion
+            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myIosVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -27,7 +27,7 @@ function IosTask() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myVersion
+            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myIosVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -43,7 +43,7 @@ function IosTask() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'ad_type=tengxun&device=ios&imei=' + imei + '&source=ios&version=' + version.myVersion
+            body: 'ad_type=tengxun&device=ios&imei=' + imei + '&source=ios&version=' + version.myIosVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -59,7 +59,7 @@ function IosTask() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei=' + imei + '&source=ios&step=' + num + '&version=' + version.myVersion
+            body: 'device=ios&imei=' + imei + '&source=ios&step=' + num + '&version=' + version.myIosVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -75,7 +75,7 @@ function IosTask() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myVersion
+            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myIosVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -91,7 +91,7 @@ function IosTask() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myVersion
+            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myIosVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -108,7 +108,7 @@ function IosTask() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'coin=' + coin + '&device=ios&double=1&imei=' + imei + '&source=ios&version=' + version.myVersion
+            body: 'coin=' + coin + '&device=ios&double=1&imei=' + imei + '&source=ios&version=' + version.myIosVersion
         }, function (error, res, body) {
 /*            if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -121,7 +121,7 @@ function IosTask() {
 //幸运大转盘
     this.turntableCoin = function (header, imei) {
         request({
-            url: 'http://api.xiaomuyu888.com/api/turntable/turntableCoin?imei=' + imei + '&source=ios&device=ios&version=' + version.myVersion,
+            url: 'http://api.xiaomuyu888.com/api/turntable/turntableCoin?imei=' + imei + '&source=ios&device=ios&version=' + version.myIosVersion,
             method: 'get',
             gzip: true,
             headers: header,
@@ -174,7 +174,7 @@ function IosTask() {
             method: 'post',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myVersion
+            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myIosVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200 && body.indexOf("surplus_numbers") != -1) {
                 //输出返回的内容
@@ -185,7 +185,7 @@ function IosTask() {
                         method: 'post',
                         gzip: true,
                         headers: header,
-                        body: 'coin=' + arr[randomNum(0, 2)] + '&device=ios&id=' + randomNum(2, 20) + '&imei=' + imei + '&is_double=1&source=ios&version=' + version.myVersion
+                        body: 'coin=' + arr[randomNum(0, 2)] + '&device=ios&id=' + randomNum(2, 20) + '&imei=' + imei + '&is_double=1&source=ios&version=' + version.myIosVersion
                     }, function (error, res, body) {
                         //输出返回的内容
                         console.log('刮卡奖励:' + body)
@@ -200,15 +200,19 @@ function IosTask() {
 module.exports.iosTask = new IosTask();
 
 function AndroidTask() {
+    var device = 'android'
+    var source = 'Z1006'
+    var versionCode = '140'
+
 
 //签到
     this.signCoin = function (header, imei) {
         request({
-            url: 'https://api.xiaomuyu888.com/api/member/signCoin',
+            url: 'http://api.xiaomuyu888.com/api/member/signCoin',
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myVersion
+            body: 'imei=' + imei + '&device=' + device + '&version=' + version.myAndroidVersion + '&source=' + source + '&version_code=' + versionCode
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -220,11 +224,11 @@ function AndroidTask() {
 //签到翻倍
     this.signCoinDouble = function (header, imei) {
         request({
-            url: 'https://api.xiaomuyu888.com/api/member/signCoinDouble',
+            url: 'http://api.xiaomuyu888.com/api/member/signCoinDouble',
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myVersion
+            body: 'imei=' + imei + '&device=' + device + '&version=' + version.myAndroidVersion + '&source=' + source + '&version_code=' + versionCode
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -236,11 +240,11 @@ function AndroidTask() {
 //步数1-1
     this.advertisementCount = function (header, imei) {
         request({
-            url: 'https://api.xiaomuyu888.com/api/Advertisement/count',
+            url: 'http://api.xiaomuyu888.com/api/Advertisement/count',
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'ad_type=tengxun&device=ios&imei=' + imei + '&source=ios&version=' + version.myVersion
+            body: 'ad_type=toutiao&imei=' + imei + '&device=' + device + '&version=' + version.myAndroidVersion + '&source=' + source + '&version_code=' + versionCode
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -252,11 +256,11 @@ function AndroidTask() {
 //步数1-2
     this.exchangedCoin = function (header, imei, num) {
         request({
-            url: 'https://api.xiaomuyu888.com/api/member/exchangedCoin',
+            url: 'http://api.xiaomuyu888.com/api/member/exchangedCoin',
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei=' + imei + '&source=ios&step=' + num + '&version=' + version.myVersion
+            body: 'step=' + num + '&imei=' + imei + '&device=' + device + '&version=' + version.myAndroidVersion + '&source=' + source + '&version_code=' + versionCode
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -268,11 +272,11 @@ function AndroidTask() {
 //刷新闻视频
     this.newsVideoCoin = function (header, imei) {
         request({
-            url: 'https://api.xiaomuyu888.com/api/member/newsVideoCoin',
+            url: 'http://api.xiaomuyu888.com/api/member/newsVideoCoin',
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myVersion
+            body: 'imei=' + imei + '&device=' + device + '&version=' + version.myAndroidVersion + '&source=' + source + '&version_code=' + versionCode
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -284,11 +288,11 @@ function AndroidTask() {
 //开宝箱
     this.videoCoin = function (header, imei) {
         request({
-            url: 'https://api.xiaomuyu888.com/api/member/videoCoin',
+            url: 'http://api.xiaomuyu888.com/api/member/videoCoin',
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myVersion
+            body: 'imei=' + imei + '&device=' + device + '&version=' + version.myAndroidVersion + '&source=' + source + '&version_code=' + versionCode
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -301,11 +305,11 @@ function AndroidTask() {
 //首页金币
     this.randCoin = function (header, imei, coin) {
         request({
-            url: 'https://api.xiaomuyu888.com/api/member/randCoin',
+            url: 'http://api.xiaomuyu888.com/api/member/randCoin',
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'coin=' + coin + '&device=ios&double=1&imei=' + imei + '&source=ios&version=' + version.myVersion
+            body: 'coin='+coin+'&step=&double=1&imei=' + imei + '&device=' + device + '&version=' + version.myAndroidVersion + '&source=' + source + '&version_code=' + versionCode
         }, function (error, res, body) {
 /*            if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -318,7 +322,7 @@ function AndroidTask() {
 //幸运大转盘
     this.turntableCoin = function (header, imei) {
         request({
-            url: 'http://api.xiaomuyu888.com/api/turntable/turntableCoin?imei=' + imei + '&source=ios&device=ios&version=' + version.myVersion,
+            url: 'http://api.xiaomuyu888.com/api/turntable/turntableCoin?imei=' + imei + '&source=' + source + '&device=' + device + '&version=' + versionCode,
             method: 'get',
             gzip: true,
             headers: header,
@@ -332,7 +336,7 @@ function AndroidTask() {
                         method: 'post',
                         gzip: true,
                         headers: header,
-                        body: 'source=ios&device=ios&unique=' + JSON.parse(body).data.unique
+                        body: 'source=' + source + '&device=' + device + '&unique=' + JSON.parse(body).data.unique
                     }, function (error, res, body) {
                         if (!error && res.statusCode == 200) {
                             //输出返回的内容
@@ -353,7 +357,7 @@ function AndroidTask() {
                 method: 'post',
                 gzip: true,
                 headers: header,
-                body: 'source=ios&device=ios&num=' + arr[j]
+                body: 'source=' + source + '&device=' + device + '&num=' + arr[j]
             }, function (error, res, body) {
                 if (!error && res.statusCode == 200) {
                     //输出返回的内容
@@ -365,24 +369,24 @@ function AndroidTask() {
 
 //刮卡奖励
     this.cardReceiveCoin = function (header, imei) {
-        var arr=[5,10,15]
+        var arr=[2,4,6]
         request({
-            url: 'https://api.xiaomuyu888.com/api/Card/cardList',
+            url: 'http://api.xiaomuyu888.com/api/Card/cardList',
             method: 'post',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myVersion
+            body: 'imei=' + imei + '&device=' + device + '&version=' + version.myAndroidVersion + '&source=' + source + '&version_code=' + versionCode
         }, function (error, res, body) {
             if (!error && res.statusCode == 200 && body.indexOf("surplus_numbers") != -1) {
                 //输出返回的内容
                 console.log('刮卡:' + JSON.parse(body).data['surplus_numbers'])
                 if (JSON.parse(body).data['surplus_numbers'] != 0) {
                     request({
-                        url: 'https://api.xiaomuyu888.com/api/Card/cardReceiveCoin',
+                        url: 'http://api.xiaomuyu888.com/api/Card/cardReceiveCoin',
                         method: 'post',
                         gzip: true,
                         headers: header,
-                        body: 'coin=' + arr[randomNum(0, 2)] + '&device=ios&id=' + randomNum(2, 20) + '&imei=' + imei + '&is_double=1&source=ios&version=' + version.myVersion
+                        body: 'coin=' + arr[randomNum(0, 2)] + '&step=&is_double=0&id=' + randomNum(2, 20) + '&double=0&imei=' + imei + '&device=' + device + '&version=' + version.myAndroidVersion + '&source=' + source + '&version_code=' + versionCode
                     }, function (error, res, body) {
                         //输出返回的内容
                         console.log('刮卡奖励:' + body)

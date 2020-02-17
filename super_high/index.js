@@ -5,6 +5,7 @@ var query = require('./service/zouluzhuan/query')
 var login = require('./service/zouluzhuan/login')
 var withdraws = require('./service/zouluzhuan/withdraws')
 var randomNum = require('./utils/randomNum')
+var bossRand = require('./utils/bossRand')
 var getNowFormatDate = require('./utils/getNowFormatDate')
 var headerAndImei = require('./domain/zouluzhuan/headerAndImei')
 var quzouTask = require('./service/quzou/task')
@@ -106,17 +107,31 @@ function myAndroidIntervalCoin(myHeader, myImei, times) {
 // myIosTask(headerAndImei.myHeader2, headerAndImei.myImei2);
 
 // 日常刷
-var t1 = schedule.scheduleJob('0 0 8,9,13,14,20,21,22,23 * * ?', function () {
-    mylogin(headerAndImei.myHeader1, headerAndImei.myImei1)
-    setTimeout(myIosTask, randomNum(300000, 1200000), headerAndImei.myHeader1, headerAndImei.myImei1, 0)
-    setTimeout(myIosIntervalCoin, randomNum(300000, 1200000), headerAndImei.myHeader1, headerAndImei.myImei1, 0)
+schedule.scheduleJob('0 0 8,9,13,14,20,21,22,23 * * ?', function (myHeader, myImei) {
+    myHeader = headerAndImei.myHeader1
+    myImei = headerAndImei.myImei1
+    mylogin(myHeader, myImei)
+    setTimeout(myIosTask, randomNum(300000, 1200000), myHeader, myImei, 0)
+    setTimeout(myIosIntervalCoin, randomNum(300000, 1200000), myHeader, myImei, 0)
 })
 
-var t2 = schedule.scheduleJob('0 0 7,8,11,12,16,17,18,23 * * ?', function () {
-    mylogin(headerAndImei.myHeader2, headerAndImei.myImei2)
-    setTimeout(myIosTask, randomNum(300000, 1200000), headerAndImei.myHeader2, headerAndImei.myImei2, 0)
-    setTimeout(myIosIntervalCoin, randomNum(300000, 1200000), headerAndImei.myHeader2, headerAndImei.myImei2, 0)
+schedule.scheduleJob('0 0 7,8,11,12,16,17,18,23 * * ?', function (myHeader, myImei) {
+    myHeader = headerAndImei.myHeader2
+    myImei = headerAndImei.myImei2
+    mylogin(myHeader, myImei)
+    setTimeout(myIosTask, randomNum(300000, 1200000), myHeader, myImei, 0)
+    setTimeout(myIosIntervalCoin, randomNum(300000, 1200000), myHeader, myImei, 0)
 })
+
+for (var j = 0; j < headerAndImei.myAndroidImei.length; j++) {
+    schedule.scheduleJob('0 0 ' + bossRand(7, 23, 8) + ' * * ?', function (myHeader, myImei) {
+        myHeader = headerAndImei.myAndroidHeader
+        myImei = headerAndImei.myAndroidImei[j] + ""
+        setTimeout(myAndroidTask, randomNum(300000, 1200000), myHeader, myImei, 0)
+        setTimeout(myAndroidIntervalCoin, randomNum(300000, 1200000), myHeader, myImei, 0)
+    })
+}
+
 
 // 无限刷
 // for (var i=0;i<1000;i++) {
@@ -154,11 +169,11 @@ function quzouRun(header, times) {
 }
 
 //整点领红包
-var t3 = schedule.scheduleJob('0 0 * * * ?', function () {
+schedule.scheduleJob('0 0 * * * ?', function () {
     setTimeout(quzouTask.zhengDian, randomNum(0, 3000000), quzouHeader.appHeader);
 })
 
 // 日常刷
-var t4 = schedule.scheduleJob('0 0 8,9,13,14,20,21,22,23 * * ?', function () {
+schedule.scheduleJob('0 0 8,9,13,14,20,21,22,23 * * ?', function () {
     setTimeout(quzouRun, randomNum(300000, 600000), quzouHeader.appHeader, 0)
 })

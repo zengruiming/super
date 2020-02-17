@@ -14,7 +14,7 @@ function Withdraws() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'amount=' + price + '&channel=1&device=ios&imei=' + imei + '&source=ios&version=' + version.myVersion
+            body: 'amount=' + price + '&channel=1&device=ios&imei=' + imei + '&source=ios&version=' + version.myIosVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
