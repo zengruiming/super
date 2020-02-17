@@ -32,22 +32,35 @@ function mylogin(myHeader, myImei) {
     login.versionIndex(myHeader, myImei)
 }
 
-// 任务
-function myTask(myHeader, myImei, times) {
+// ios任务
+function myIosTask(myHeader, myImei, times) {
     times++;
     if (times <= 2) {
-        task.signCoin(myHeader, myImei)//签到
-        task.signCoinDouble(myHeader, myImei) //签到翻倍
+        task.iosTask.signCoin(myHeader, myImei)//签到
+        task.iosTask.signCoinDouble(myHeader, myImei) //签到翻倍
     }
-    if (times <= 6) task.advertisementCount(myHeader, myImei) //步数1-1
-    if (times == 8) task.exchangedCoin(myHeader, myImei, randomNum(10001, 20001)) //步数1-2
+    if (times <= 6) task.iosTask.advertisementCount(myHeader, myImei) //步数1-1
+    if (times == 8) task.iosTask.exchangedCoin(myHeader, myImei, randomNum(10001, 20001)) //步数1-2
     if (times <= 15) {
-        task.turntableCoin(myHeader, myImei) //幸运大转盘
-        setTimeout(myTask, randomNum(30001, 60000), myHeader, myImei, times)
+        task.iosTask.turntableCoin(myHeader, myImei) //幸运大转盘
+        setTimeout(myIosTask, randomNum(30001, 60000), myHeader, myImei, times)
     } else {
-        task.chestcoin(myHeader, myImei)
+        task.iosTask.chestcoin(myHeader, myImei)
     }
     // console.log('--> 第' + times + '次')
+}
+
+// ios循环刷分
+function myIosIntervalCoin(myHeader, myImei, times) {
+    times++;
+    num = randomNum(0, 3)
+    if (num == 0) task.iosTask.newsVideoCoin(myHeader, myImei) //刷新闻视频
+    if (num == 1) task.iosTask.videoCoin(myHeader, myImei) //看推荐视频
+    if (num == 2) task.iosTask.cardReceiveCoin(myHeader, myImei) //刮卡奖励
+    if (num == 3 && times % 2 == 1) task.iosTask.randCoin(myHeader, myImei, randomNum(15, 18)) //首页随机金币
+    if (times <= 50) {
+        setTimeout(myIosIntervalCoin, randomNum(30001, 40000), myHeader, myImei, times)
+    }
 }
 
 // 提现
@@ -55,16 +68,34 @@ function myWithdraws(myHeader, myImei) {
     withdraws.withdrawsConfirm(myHeader, myImei, 100)
 }
 
-// 循环刷分
-function myIntervalCoin(myHeader, myImei, times) {
+// android任务
+function myAndroidTask(myHeader, myImei, times) {
+    times++;
+    if (times <= 2) {
+        task.androidTask.signCoin(myHeader, myImei)//签到
+        task.androidTask.signCoinDouble(myHeader, myImei) //签到翻倍
+    }
+    if (times <= 6) task.androidTask.advertisementCount(myHeader, myImei) //步数1-1
+    if (times == 8) task.androidTask.exchangedCoin(myHeader, myImei, randomNum(10001, 20001)) //步数1-2
+    if (times <= 15) {
+        task.androidTask.turntableCoin(myHeader, myImei) //幸运大转盘
+        setTimeout(myAndroidTask, randomNum(30001, 60000), myHeader, myImei, times)
+    } else {
+        task.androidTask.chestcoin(myHeader, myImei)
+    }
+    // console.log('--> 第' + times + '次')
+}
+
+// android循环刷分
+function myAndroidIntervalCoin(myHeader, myImei, times) {
     times++;
     num = randomNum(0, 3)
-    if (num == 0) task.newsVideoCoin(myHeader, myImei) //刷新闻视频
-    if (num == 1) task.videoCoin(myHeader, myImei) //看推荐视频
-    if (num == 2) task.cardReceiveCoin(myHeader, myImei) //刮卡奖励
-    if (num == 3 && times % 2 == 1) task.randCoin(myHeader, myImei, randomNum(15, 18)) //首页随机金币
+    if (num == 0) task.androidTask.newsVideoCoin(myHeader, myImei) //刷新闻视频
+    if (num == 1) task.androidTask.videoCoin(myHeader, myImei) //看推荐视频
+    if (num == 2) task.androidTask.cardReceiveCoin(myHeader, myImei) //刮卡奖励
+    if (num == 3 && times % 2 == 1) task.androidTask.randCoin(myHeader, myImei, randomNum(15, 18)) //首页随机金币
     if (times <= 50) {
-        setTimeout(myIntervalCoin, randomNum(30001, 40000), myHeader, myImei, times)
+        setTimeout(myAndroidIntervalCoin, randomNum(30001, 40000), myHeader, myImei, times)
     }
 }
 
@@ -72,25 +103,25 @@ function myIntervalCoin(myHeader, myImei, times) {
 // myWithdraws(headerAndImei.myHeader2,headerAndImei.myImei2);
 // mylogin(headerAndImei.myHeader2,headerAndImei.myImei2);
 // myQuery(headerAndImei.myHeader2,headerAndImei.myImei2);
-// myTask(headerAndImei.myHeader2, headerAndImei.myImei2);
+// myIosTask(headerAndImei.myHeader2, headerAndImei.myImei2);
 
 // 日常刷
 var t1 = schedule.scheduleJob('0 0 8,9,13,14,20,21,22,23 * * ?', function () {
     mylogin(headerAndImei.myHeader1, headerAndImei.myImei1)
-    setTimeout(myTask, randomNum(300000, 1200000), headerAndImei.myHeader1, headerAndImei.myImei1, 0)
-    setTimeout(myIntervalCoin, randomNum(300000, 1200000), headerAndImei.myHeader1, headerAndImei.myImei1, 0)
+    setTimeout(myIosTask, randomNum(300000, 1200000), headerAndImei.myHeader1, headerAndImei.myImei1, 0)
+    setTimeout(myIosIntervalCoin, randomNum(300000, 1200000), headerAndImei.myHeader1, headerAndImei.myImei1, 0)
 })
 
 var t2 = schedule.scheduleJob('0 0 7,8,11,12,16,17,18,23 * * ?', function () {
     mylogin(headerAndImei.myHeader2, headerAndImei.myImei2)
-    setTimeout(myTask, randomNum(300000, 1200000), headerAndImei.myHeader2, headerAndImei.myImei2, 0)
-    setTimeout(myIntervalCoin, randomNum(300000, 1200000), headerAndImei.myHeader2, headerAndImei.myImei2, 0)
+    setTimeout(myIosTask, randomNum(300000, 1200000), headerAndImei.myHeader2, headerAndImei.myImei2, 0)
+    setTimeout(myIosIntervalCoin, randomNum(300000, 1200000), headerAndImei.myHeader2, headerAndImei.myImei2, 0)
 })
 
 // 无限刷
 // for (var i=0;i<1000;i++) {
-// setInterval(task.randCoin,1,headerAndImei.myHeader1, headerAndImei.myImei1, randomNum(15,18))
-// setInterval(task.randCoin,1,headerAndImei.myHeader2, headerAndImei.myImei2, randomNum(15,18))
+// setInterval(task.iosTask.randCoin,1,headerAndImei.myHeader1, headerAndImei.myImei1, randomNum(15,18))
+// setInterval(task.iosTask.randCoin,1,headerAndImei.myHeader2, headerAndImei.myImei2, randomNum(15,18))
 // }
 
 
