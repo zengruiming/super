@@ -69,7 +69,7 @@ function myIntervalCoin(myHeader, myImei, times) {
 }
 
 // 查询
-myWithdraws(headerAndImei.myHeader2,headerAndImei.myImei2);
+// myWithdraws(headerAndImei.myHeader2,headerAndImei.myImei2);
 // mylogin(headerAndImei.myHeader2,headerAndImei.myImei2);
 // myQuery(headerAndImei.myHeader2,headerAndImei.myImei2);
 // myTask(headerAndImei.myHeader2, headerAndImei.myImei2);
