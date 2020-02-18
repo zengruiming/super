@@ -75,7 +75,7 @@ function myWithdraws(myHeader, myImei) {
 // myQuery(headerAndImei.myHeader2,headerAndImei.myImei2);
 // myTask(headerAndImei.myHeader2, headerAndImei.myImei2);
 
-// 日常刷
+// 日常刷-iPhone
 schedule.scheduleJob('0 0 8,9,13,14,20,21,22,23 * * ?', function (myHeader, myImei) {
     myHeader = headerAndImei.myHeader1
     myImei = headerAndImei.myImei1
@@ -92,6 +92,7 @@ schedule.scheduleJob('0 0 7,8,11,12,16,17,18,23 * * ?', function (myHeader, myIm
     setTimeout(myIntervalCoin, randomNum(300000, 1200000), myHeader, myImei, task.iosTask, 0)
 })
 
+// 日常刷-android
 for (var i = 0; i < headerAndImei.myAndroidImei.length; i++) {
     schedule.scheduleJob('0 0 ' + bossRand(7, 23, 8) + ' * * ?', function (myImei) {
         setTimeout(myTask, randomNum(300000, 1200000), headerAndImei.myAndroidHeader, myImei, task.androidTask, 0)
