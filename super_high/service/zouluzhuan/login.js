@@ -5,20 +5,20 @@ var version = require('../../domain/zouluzhuan/version')
 
 var request = require('request');
 
-function Login() {
+function LoginIos() {
 
 //登录01
-    this.homeStep = function (header, imei, data) {
+    this.homeStep = function (header, imei, date) {
         request({
             url: 'https://api.xiaomuyu888.com/api/home/step',
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'date='+data+'&device=ios&imei='+imei+'&source=ios&version=' + version.myIosVersion
+            body: 'date=' + date + '&device=ios&imei=' + imei + '&source=ios&version=' + version.myIosVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                    console.log('登录01:'+body)
+                console.log('登录01:' + body)
             }
         })
     }
@@ -30,11 +30,11 @@ function Login() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei='+imei+'&source=ios&version=' + version.myIosVersion
+            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myIosVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                    console.log('登录02:'+body)
+                console.log('登录02:' + body)
             }
         })
     }
@@ -46,11 +46,11 @@ function Login() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei='+imei+'&source=ios&version=' + version.myIosVersion
+            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myIosVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                    console.log('登录03:'+body)
+                console.log('登录03:' + body)
             }
         })
     }
@@ -62,27 +62,27 @@ function Login() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&device_tokens='+tokens+'&imei='+imei+'&source=ios&version=' + version.myIosVersion
+            body: 'device=ios&device_tokens=' + tokens + '&imei=' + imei + '&source=ios&version=' + version.myIosVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                    console.log('登录04:'+body)
+                console.log('登录04:' + body)
             }
         })
     }
 
 //登录05
-    this.newAdControl = function (header, imei,type) {
+    this.newAdControl = function (header, imei, type) {
         request({
             url: 'https://api.xiaomuyu888.com/api/Advertisement/newAdControl',
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei='+imei+'&source=ios&type='+type+'&version=' + version.myIosVersion
+            body: 'device=ios&imei=' + imei + '&source=ios&type=' + type + '&version=' + version.myIosVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                    console.log('登录05:'+body)
+                console.log('登录05:' + body)
             }
         })
     }
@@ -94,11 +94,11 @@ function Login() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei='+imei+'&source=ios&version=' + version.myIosVersion
+            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myIosVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                    console.log('登录06:'+body)
+                console.log('登录06:' + body)
             }
         })
     }
@@ -110,11 +110,11 @@ function Login() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'device=ios&imei='+imei+'&source=ios&version=' + version.myIosVersion + '&version_code=' + version.myIosVersion + '&version_device=2'
+            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myIosVersion + '&version_code=' + version.myIosVersion + '&version_device=2'
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                    console.log('登录07:'+body)
+                console.log('登录07:' + body)
             }
         })
     }
@@ -122,4 +122,105 @@ function Login() {
 
 };
 
-module.exports = new Login();
+module.exports.iosLogin = new LoginIos();
+
+function LoginAndroid() {
+
+//登录01
+    this.memberRegister = function (header, imei) {
+        request({
+            url: 'http://api.xiaomuyu888.com/api/member/register',
+            method: 'POST',
+            gzip: true,
+            headers: header,
+            body: 'imei=' + imei + '&device=android&version=' + version.myAndroidVersion + '&source=Z1006&version_code=140'
+        }, function (error, res, body) {
+            if (!error && res.statusCode == 200) {
+                //输出返回的内容
+                console.log('登录01:' + body)
+            }
+        })
+    }
+
+//登录02
+    this.updateUmengDeviceToken = function (header, imei, deviceTokens) {
+        request({
+            url: 'http://api.xiaomuyu888.com/api/member/updateUmengDeviceToken',
+            method: 'POST',
+            gzip: true,
+            headers: header,
+            body: 'device_tokens=' + deviceTokens + '&imei=' + imei + '&device=android&version=' + version.myAndroidVersion + '&source=Z1006&version_code=140'
+        }, function (error, res, body) {
+            if (!error && res.statusCode == 200) {
+                //输出返回的内容
+                console.log('登录02:' + body)
+            }
+        })
+    }
+
+//登录03
+    this.signCoinGet = function (header, imei) {
+        request({
+            url: 'http://api.xiaomuyu888.com/api/member/signCoin?device=android&version_code=140&source=Z1006&imei=' + imei + '&version=' + version.myIosVersion,
+            method: 'GET',
+            gzip: true,
+            headers: header,
+        }, function (error, res, body) {
+            if (!error && res.statusCode == 200) {
+                //输出返回的内容
+                console.log('登录03:' + body)
+            }
+        })
+    }
+
+//登录04
+    this.signCoinPost = function (header, imei) {
+        request({
+            url: 'http://api.xiaomuyu888.com/api/member/signCoin',
+            method: 'POST',
+            gzip: true,
+            headers: header,
+            body: 'imei=' + imei + '&device=android&version=' + version.myIosVersion + '&source=Z1006&version_code=140'
+        }, function (error, res, body) {
+            if (!error && res.statusCode == 200) {
+                //输出返回的内容
+                console.log('登录04:' + body)
+            }
+        })
+    }
+
+//登录05
+    this.memberIndex = function (header, imei) {
+        request({
+            url: 'http://api.xiaomuyu888.com/api/member/index?device=android&version_code=140&source=Z1006&imei=' + imei + '&version=' + version.myIosVersion,
+            method: 'GET',
+            gzip: true,
+            headers: header,
+        }, function (error, res, body) {
+            if (!error && res.statusCode == 200) {
+                //输出返回的内容
+                console.log('登录05:' + body)
+            }
+        })
+    }
+
+//登录06
+    this.updateAmountStep = function (header, imei, amountStep) {
+        request({
+            url: 'http://api.xiaomuyu888.com/api/member/updateAmountStep',
+            method: 'POST',
+            gzip: true,
+            headers: header,
+            body: 'amount_step=' + amountStep + '&imei=' + imei + '&device=android&version=' + version.myIosVersion + '&source=Z1006&version_code=140'
+        }, function (error, res, body) {
+            if (!error && res.statusCode == 200) {
+                //输出返回的内容
+                console.log('登录06:' + body)
+            }
+        })
+    }
+
+
+};
+
+module.exports.androidLogin = new LoginAndroid();

@@ -21,16 +21,16 @@ function myQuery(myHeader, myImei) {
 
 // 登录
 function mylogin(myHeader, myImei) {
-    login.homeStep(myHeader, myImei, '1990-01-01')
-    login.memberIndex(myHeader, myImei)
-    login.homeTab(myHeader, myImei)
-    login.memberIndex(myHeader, '00322add0a8252f3f6c7a9a134d47df9af87e821')
-    // login.updateUmengDeviceToken(myHeader, myImei, '2c40fa2a2236163a78ca2bd5f8a377a142f950fae79f86e54d310d92b80bdb02')
-    login.newAdControl(myHeader, myImei, 'xinxiliu')
-    login.homeTimestamp(myHeader, myImei)
-    login.homeStep(myHeader, myImei, getNowFormatDate())
-    login.newAdControl(myHeader, myImei, 'jili')
-    login.versionIndex(myHeader, myImei)
+    login.iosLogin.homeStep(myHeader, myImei, '1990-01-01')
+    login.iosLogin.memberIndex(myHeader, myImei)
+    login.iosLogin.homeTab(myHeader, myImei)
+    login.iosLogin.memberIndex(myHeader, '00322add0a8252f3f6c7a9a134d47df9af87e821')
+    // login.iosLogin.updateUmengDeviceToken(myHeader, myImei, '2c40fa2a2236163a78ca2bd5f8a377a142f950fae79f86e54d310d92b80bdb02')
+    login.iosLogin.newAdControl(myHeader, myImei, 'xinxiliu')
+    login.iosLogin.homeTimestamp(myHeader, myImei)
+    login.iosLogin.homeStep(myHeader, myImei, getNowFormatDate())
+    login.iosLogin.newAdControl(myHeader, myImei, 'jili')
+    login.iosLogin.versionIndex(myHeader, myImei)
 }
 
 // 任务
@@ -40,8 +40,8 @@ function myTask(myHeader, myImei, myAllTask, times) {
         myAllTask.signCoin(myHeader, myImei)//签到
         myAllTask.signCoinDouble(myHeader, myImei) //签到翻倍
     }
-    if (times <= 6) myAllTask.advertisementCount(myHeader, myImei) //步数1-1
-    if (times == 8) myAllTask.exchangedCoin(myHeader, myImei, randomNum(10001, 20001)) //步数1-2
+    // if (times <= 6) myAllTask.advertisementCount(myHeader, myImei) //步数1-1
+    // if (times == 8) myAllTask.exchangedCoin(myHeader, myImei, randomNum(10001, 20001)) //步数1-2
     if (times <= 15) {
         myAllTask.turntableCoin(myHeader, myImei) //幸运大转盘
         setTimeout(myTask, randomNum(30001, 60000), myHeader, myImei, myAllTask, times)
@@ -76,12 +76,20 @@ function myWithdraws(myHeader, myImei) {
 // myTask(headerAndImei.myHeader2, headerAndImei.myImei2);
 
 // 日常刷-iPhone
-var myIos = {}
+var myIos = {},myStep=0
 for (var i = 0; i < headerAndImei.myIosImei.length; i++) {
     myIos[headerAndImei.myIosImei[i]] = headerAndImei.myIosHeader[i]
 }
 for (var key in myIos) {
+    // 更新步数
+    myStep = randomNum(5001, 20001)
+    // 兑换步数
+    task.iosTask.exchangedCoin(myIos[key], key,myStep)
+
     schedule.scheduleJob('0 0 ' + bossRand(7, 23, 8) + ' * * ?', function (key) {
+        // 登录
+        login.iosLogin.memberIndex(myIos[key], key)
+
         setTimeout(myTask, randomNum(300000, 1200000), myIos[key], key, task.iosTask, 0)
         setTimeout(myIntervalCoin, randomNum(300000, 1200000), myIos[key], key, task.iosTask, 0)
     }.bind(null, key))
@@ -89,7 +97,16 @@ for (var key in myIos) {
 
 // 日常刷-android
 for (var i = 0; i < headerAndImei.myAndroidImei.length; i++) {
+    // 更新步数
+    myStep = randomNum(5001, 20001)
+    login.androidLogin.updateAmountStep(headerAndImei.myAndroidHeader,headerAndImei.myAndroidImei[i],myStep)
+    // 兑换步数
+    task.androidTask.exchangedCoin(headerAndImei.myAndroidHeader,headerAndImei.myAndroidImei[i],myStep)
+
     schedule.scheduleJob('0 0 ' + bossRand(7, 23, 8) + ' * * ?', function (myImei) {
+        // 登录
+        login.androidLogin.memberIndex(headerAndImei.myAndroidHeader, myImei)
+
         setTimeout(myTask, randomNum(300000, 1200000), headerAndImei.myAndroidHeader, myImei, task.androidTask, 0)
         setTimeout(myIntervalCoin, randomNum(300000, 1200000), headerAndImei.myAndroidHeader, myImei, task.androidTask, 0)
     }.bind(null, headerAndImei.myAndroidImei[i] + ""))
