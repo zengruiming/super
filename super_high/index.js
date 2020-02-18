@@ -19,6 +19,11 @@ function myQuery(myHeader, myImei) {
     query.queryIndex(myHeader, myImei) //查询账户金币|提现详情
 }
 
+// 提现
+function myWithdraws(myHeader, myImei) {
+    withdraws.withdrawsConfirm(myHeader, myImei, 100)
+}
+
 // 登录
 function mylogin(myHeader, myImei, myAllTask) {
     myAllTask.memberIndex(myHeader, myImei)//登录
@@ -62,17 +67,6 @@ function myIntervalCoin(myHeader, myImei, myAllTask, times) {
     }
 }
 
-// 提现
-function myWithdraws(myHeader, myImei) {
-    withdraws.withdrawsConfirm(myHeader, myImei, 100)
-}
-
-// 查询
-// myWithdraws(headerAndImei.myHeader2,headerAndImei.myImei2);
-// mylogin(headerAndImei.myHeader2,headerAndImei.myImei2);
-// myQuery(headerAndImei.myHeader2,headerAndImei.myImei2);
-// myTask(headerAndImei.myHeader2, headerAndImei.myImei2);
-
 // 日常刷-iPhone
 for (var i = 0; i < headerAndImei.myIosImei.length; i++) {
     myIos[headerAndImei.myIosImei[i]] = headerAndImei.myIosHeader[i]
@@ -109,6 +103,10 @@ for (var i = 0; i < headerAndImei.myAndroidImei.length; i++) {
 // setInterval(task.iosTask.randCoin,1,headerAndImei.myHeader2, headerAndImei.myImei2, randomNum(15,18))
 // }
 
+
+// 查询
+// myWithdraws(headerAndImei.myIosHeader[1],headerAndImei.myIosImei[1]);
+// myQuery(headerAndImei.myIosHeader[1],headerAndImei.myIosImei[1]);
 
 //趣走
 var i, j
