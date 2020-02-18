@@ -76,21 +76,18 @@ function myWithdraws(myHeader, myImei) {
 // myTask(headerAndImei.myHeader2, headerAndImei.myImei2);
 
 // 日常刷-iPhone
-schedule.scheduleJob('0 0 8,9,13,14,20,21,22,23 * * ?', function (myHeader, myImei) {
-    myHeader = headerAndImei.myHeader1
-    myImei = headerAndImei.myImei1
-    mylogin(myHeader, myImei)
-    setTimeout(myTask, randomNum(300000, 1200000), myHeader, myImei, task.iosTask, 0)
-    setTimeout(myIntervalCoin, randomNum(300000, 1200000), myHeader, myImei, task.iosTask, 0)
-})
-
-schedule.scheduleJob('0 0 7,8,11,12,16,17,18,23 * * ?', function (myHeader, myImei) {
-    myHeader = headerAndImei.myHeader2
-    myImei = headerAndImei.myImei2
-    mylogin(myHeader, myImei)
-    setTimeout(myTask, randomNum(300000, 1200000), myHeader, myImei, task.iosTask, 0)
-    setTimeout(myIntervalCoin, randomNum(300000, 1200000), myHeader, myImei, task.iosTask, 0)
-})
+var myIos = {}
+for (var i = 0; i < headerAndImei.myIosImei.length; i++) {
+    myIos[headerAndImei.myIosImei[i]] = headerAndImei.myIosHeader[i]
+}
+for (var key in myIos) {
+    schedule.scheduleJob('0 0 ' + bossRand(7, 23, 8) + ' * * ?', function (key) {
+        console.log(key)
+        console.log(myIos[key])
+        setTimeout(myTask, randomNum(300000, 1200000), myIos[key], key, task.iosTask, 0)
+        setTimeout(myIntervalCoin, randomNum(300000, 1200000), myIos[key], key, task.iosTask, 0)
+    }.bind(null, key))
+}
 
 // 日常刷-android
 for (var i = 0; i < headerAndImei.myAndroidImei.length; i++) {
