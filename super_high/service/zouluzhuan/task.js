@@ -68,7 +68,7 @@ function IosTask() {
         })
     }
 
-//步数1-1
+//广告
     this.advertisementCount = function (header, imei) {
         request({
             url: 'https://api.xiaomuyu888.com/api/Advertisement/count',
@@ -79,12 +79,12 @@ function IosTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('步数1-1:' + body)
+                console.log('广告:' + body)
             }
         })
     }
 
-//步数1-2
+//步数
     this.exchangedCoin = function (header, imei, num) {
         request({
             url: 'https://api.xiaomuyu888.com/api/member/exchangedCoin',
@@ -95,7 +95,7 @@ function IosTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('步数1-2:' + body)
+                console.log('步数:' + body)
             }
         })
     }

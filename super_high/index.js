@@ -27,23 +27,21 @@ function myWithdraws(myHeader, myImei) {
 // 登录
 function mylogin(myHeader, myImei, myAllTask) {
     myAllTask.memberIndex(myHeader, myImei)//登录
+    setTimeout(myAllTask.signCoin, 1000, myHeader, myImei)
+    setTimeout(myAllTask.signCoinDouble, 21000, myHeader, myImei)
     // 更新步数
     myStep = randomNum(8001, 20001)
     myAllTask.updateAmountStep(myHeader, myImei, myStep)
     // 兑换步数
-    myAllTask.exchangedCoin(myHeader, myImei, myStep)
+    setTimeout(myAllTask.exchangedCoin,62000,myHeader, myImei, myStep)
 }
 
 // 任务
 function myTask(myHeader, myImei, myAllTask, times) {
     times++;
     myAllTask.memberIndex(myHeader, myImei)//登录
-    if (times <= 2) {
-        myAllTask.signCoin(myHeader, myImei)//签到
-        myAllTask.signCoinDouble(myHeader, myImei) //签到翻倍
-    }
-    // if (times <= 6) myAllTask.advertisementCount(myHeader, myImei) //步数1-1
-    // if (times == 8) myAllTask.exchangedCoin(myHeader, myImei, randomNum(10001, 20001)) //步数1-2
+    if (times <= 6) myAllTask.advertisementCount(myHeader, myImei) //广告
+    // if (times == 8) myAllTask.exchangedCoin(myHeader, myImei, randomNum(10001, 20001)) //步数
     if (times <= 15) {
         myAllTask.turntableCoin(myHeader, myImei) //幸运大转盘
         setTimeout(myTask, randomNum(30001, 60000), myHeader, myImei, myAllTask, times)
