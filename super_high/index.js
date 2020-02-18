@@ -82,8 +82,6 @@ for (var i = 0; i < headerAndImei.myIosImei.length; i++) {
 }
 for (var key in myIos) {
     schedule.scheduleJob('0 0 ' + bossRand(7, 23, 8) + ' * * ?', function (key) {
-        console.log(key)
-        console.log(myIos[key])
         setTimeout(myTask, randomNum(300000, 1200000), myIos[key], key, task.iosTask, 0)
         setTimeout(myIntervalCoin, randomNum(300000, 1200000), myIos[key], key, task.iosTask, 0)
     }.bind(null, key))
