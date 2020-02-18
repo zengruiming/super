@@ -23,22 +23,6 @@ function LoginIos() {
         })
     }
 
-//登录02
-    this.memberIndex = function (header, imei) {
-        request({
-            url: 'https://api.xiaomuyu888.com/api/member/index',
-            method: 'POST',
-            gzip: true,
-            headers: header,
-            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myIosVersion
-        }, function (error, res, body) {
-            if (!error && res.statusCode == 200) {
-                //输出返回的内容
-                console.log('登录02:' + body)
-            }
-        })
-    }
-
 //登录03
     this.homeTab = function (header, imei) {
         request({
@@ -188,38 +172,6 @@ function LoginAndroid() {
             }
         })
     }
-
-//登录05
-    this.memberIndex = function (header, imei) {
-        request({
-            url: 'http://api.xiaomuyu888.com/api/member/index?device=android&version_code=140&source=Z1006&imei=' + imei + '&version=' + version.myIosVersion,
-            method: 'GET',
-            gzip: true,
-            headers: header,
-        }, function (error, res, body) {
-            if (!error && res.statusCode == 200) {
-                //输出返回的内容
-                console.log('登录05:' + body)
-            }
-        })
-    }
-
-//登录06
-    this.updateAmountStep = function (header, imei, amountStep) {
-        request({
-            url: 'http://api.xiaomuyu888.com/api/member/updateAmountStep',
-            method: 'POST',
-            gzip: true,
-            headers: header,
-            body: 'amount_step=' + amountStep + '&imei=' + imei + '&device=android&version=' + version.myIosVersion + '&source=Z1006&version_code=140'
-        }, function (error, res, body) {
-            if (!error && res.statusCode == 200) {
-                //输出返回的内容
-                console.log('登录06:' + body)
-            }
-        })
-    }
-
 
 };
 

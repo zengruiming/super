@@ -10,7 +10,7 @@ var getNowFormatDate = require('./utils/getNowFormatDate')
 var headerAndImei = require('./domain/zouluzhuan/headerAndImei')
 var quzouTask = require('./service/quzou/task')
 var quzouHeader = require('./domain/quzou/header')
-var num
+var num = 0, myIos = {}, myStep = 0
 
 
 // 查询
@@ -20,22 +20,19 @@ function myQuery(myHeader, myImei) {
 }
 
 // 登录
-function mylogin(myHeader, myImei) {
-    login.iosLogin.homeStep(myHeader, myImei, '1990-01-01')
-    login.iosLogin.memberIndex(myHeader, myImei)
-    login.iosLogin.homeTab(myHeader, myImei)
-    login.iosLogin.memberIndex(myHeader, '00322add0a8252f3f6c7a9a134d47df9af87e821')
-    // login.iosLogin.updateUmengDeviceToken(myHeader, myImei, '2c40fa2a2236163a78ca2bd5f8a377a142f950fae79f86e54d310d92b80bdb02')
-    login.iosLogin.newAdControl(myHeader, myImei, 'xinxiliu')
-    login.iosLogin.homeTimestamp(myHeader, myImei)
-    login.iosLogin.homeStep(myHeader, myImei, getNowFormatDate())
-    login.iosLogin.newAdControl(myHeader, myImei, 'jili')
-    login.iosLogin.versionIndex(myHeader, myImei)
+function mylogin(myHeader, myImei, myAllTask) {
+    myAllTask.memberIndex(myHeader, myImei)//登录
+    // 更新步数
+    myStep = randomNum(8001, 20001)
+    myAllTask.updateAmountStep(myHeader, myImei, myStep)
+    // 兑换步数
+    myAllTask.exchangedCoin(myHeader, myImei, myStep)
 }
 
 // 任务
 function myTask(myHeader, myImei, myAllTask, times) {
     times++;
+    myAllTask.memberIndex(myHeader, myImei)//登录
     if (times <= 2) {
         myAllTask.signCoin(myHeader, myImei)//签到
         myAllTask.signCoinDouble(myHeader, myImei) //签到翻倍
@@ -54,6 +51,7 @@ function myTask(myHeader, myImei, myAllTask, times) {
 // 循环刷分
 function myIntervalCoin(myHeader, myImei, myAllTask, times) {
     times++;
+    myAllTask.memberIndex(myHeader, myImei)//登录
     num = randomNum(0, 3)
     if (num == 0) myAllTask.newsVideoCoin(myHeader, myImei) //刷新闻视频
     if (num == 1) myAllTask.videoCoin(myHeader, myImei) //看推荐视频
@@ -76,20 +74,16 @@ function myWithdraws(myHeader, myImei) {
 // myTask(headerAndImei.myHeader2, headerAndImei.myImei2);
 
 // 日常刷-iPhone
-var myIos = {},myStep=0
 for (var i = 0; i < headerAndImei.myIosImei.length; i++) {
     myIos[headerAndImei.myIosImei[i]] = headerAndImei.myIosHeader[i]
 }
 for (var key in myIos) {
-    // 更新步数
-    myStep = randomNum(5001, 20001)
-    // 兑换步数
-    task.iosTask.exchangedCoin(myIos[key], key,myStep)
-
-    schedule.scheduleJob('0 0 ' + bossRand(7, 23, 8) + ' * * ?', function (key) {
-        // 登录
-        login.iosLogin.memberIndex(myIos[key], key)
-
+    //登录
+    schedule.scheduleJob('0 0 7 * * ?', function (key) {
+        setTimeout(mylogin, randomNum(1800000, 3600000), myIos[key], key, task.iosTask)
+    }.bind(null, key))
+    //任务
+    schedule.scheduleJob('0 0 ' + bossRand(8, 23, 8) + ' * * ?', function (key) {
         setTimeout(myTask, randomNum(300000, 1200000), myIos[key], key, task.iosTask, 0)
         setTimeout(myIntervalCoin, randomNum(300000, 1200000), myIos[key], key, task.iosTask, 0)
     }.bind(null, key))
@@ -97,16 +91,12 @@ for (var key in myIos) {
 
 // 日常刷-android
 for (var i = 0; i < headerAndImei.myAndroidImei.length; i++) {
-    // 更新步数
-    myStep = randomNum(5001, 20001)
-    login.androidLogin.updateAmountStep(headerAndImei.myAndroidHeader,headerAndImei.myAndroidImei[i],myStep)
-    // 兑换步数
-    task.androidTask.exchangedCoin(headerAndImei.myAndroidHeader,headerAndImei.myAndroidImei[i],myStep)
-
-    schedule.scheduleJob('0 0 ' + bossRand(7, 23, 8) + ' * * ?', function (myImei) {
-        // 登录
-        login.androidLogin.memberIndex(headerAndImei.myAndroidHeader, myImei)
-
+    //登录
+    schedule.scheduleJob('0 0 7 * * ?', function (myImei) {
+        setTimeout(mylogin, randomNum(1800000, 3600000), headerAndImei.myAndroidHeader, myImei, task.androidTask)
+    }.bind(null, headerAndImei.myAndroidImei[i] + ""))
+    //任务
+    schedule.scheduleJob('0 0 ' + bossRand(8, 23, 8) + ' * * ?', function (myImei) {
         setTimeout(myTask, randomNum(300000, 1200000), headerAndImei.myAndroidHeader, myImei, task.androidTask, 0)
         setTimeout(myIntervalCoin, randomNum(300000, 1200000), headerAndImei.myAndroidHeader, myImei, task.androidTask, 0)
     }.bind(null, headerAndImei.myAndroidImei[i] + ""))
