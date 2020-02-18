@@ -34,31 +34,31 @@ function mylogin(myHeader, myImei) {
 }
 
 // 任务
-function myTask(myHeader, myImei, myTask, times) {
+function myTask(myHeader, myImei, myAllTask, times) {
     times++;
     if (times <= 2) {
-        myTask.signCoin(myHeader, myImei)//签到
-        myTask.signCoinDouble(myHeader, myImei) //签到翻倍
+        myAllTask.signCoin(myHeader, myImei)//签到
+        myAllTask.signCoinDouble(myHeader, myImei) //签到翻倍
     }
-    if (times <= 6) myTask.advertisementCount(myHeader, myImei) //步数1-1
-    if (times == 8) myTask.exchangedCoin(myHeader, myImei, randomNum(10001, 20001)) //步数1-2
+    if (times <= 6) myAllTask.advertisementCount(myHeader, myImei) //步数1-1
+    if (times == 8) myAllTask.exchangedCoin(myHeader, myImei, randomNum(10001, 20001)) //步数1-2
     if (times <= 15) {
-        myTask.turntableCoin(myHeader, myImei) //幸运大转盘
+        myAllTask.turntableCoin(myHeader, myImei) //幸运大转盘
         setTimeout(myTask, randomNum(30001, 60000), myHeader, myImei, times)
     } else {
-        myTask.chestcoin(myHeader, myImei)
+        myAllTask.chestcoin(myHeader, myImei)
     }
     // console.log('--> 第' + times + '次')
 }
 
 // 循环刷分
-function myIntervalCoin(myHeader, myImei, myTask, times) {
+function myIntervalCoin(myHeader, myImei, myAllTask, times) {
     times++;
     num = randomNum(0, 3)
-    if (num == 0) myTask.newsVideoCoin(myHeader, myImei) //刷新闻视频
-    if (num == 1) myTask.videoCoin(myHeader, myImei) //看推荐视频
-    if (num == 2) myTask.cardReceiveCoin(myHeader, myImei) //刮卡奖励
-    if (num == 3 && times % 2 == 1) myTask.randCoin(myHeader, myImei, randomNum(15, 18)) //首页随机金币
+    if (num == 0) myAllTask.newsVideoCoin(myHeader, myImei) //刷新闻视频
+    if (num == 1) myAllTask.videoCoin(myHeader, myImei) //看推荐视频
+    if (num == 2) myAllTask.cardReceiveCoin(myHeader, myImei) //刮卡奖励
+    if (num == 3 && times % 2 == 1) myAllTask.randCoin(myHeader, myImei, randomNum(15, 18)) //首页随机金币
     if (times <= 50) {
         setTimeout(myIntervalCoin, randomNum(30001, 40000), myHeader, myImei, times)
     }
