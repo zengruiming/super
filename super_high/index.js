@@ -123,14 +123,20 @@ schedule.scheduleJob('0 0 7,8,11,12,16,17,18,23 * * ?', function (myHeader, myIm
     setTimeout(myIosIntervalCoin, randomNum(300000, 1200000), myHeader, myImei, 0)
 })
 
-var androidImei = headerAndImei.myAndroidImei
-for (var j = 0; j < androidImei.length; j++) {
-    schedule.scheduleJob('0 0 ' + bossRand(7, 23, 8) + ' * * ?', function (myHeader, myImei) {
-        myHeader = headerAndImei.myAndroidHeader
-        myImei = androidImei[j] + ""
-        setTimeout(myAndroidTask, randomNum(300000, 1200000), myHeader, myImei, 0)
-        setTimeout(myAndroidIntervalCoin, randomNum(300000, 1200000), myHeader, myImei, 0)
-    })
+// for (var j = 0; j < headerAndImei.myAndroidImei.length; j++) {
+//     schedule.scheduleJob('0 0 ' + bossRand(7, 23, 8) + ' * * ?', function (myHeader, myImei) {
+//         myHeader = headerAndImei.myAndroidHeader
+//         myImei = headerAndImei.myAndroidImei[j] + ""
+//         setTimeout(myAndroidTask, randomNum(300000, 1200000), myHeader, myImei, 0)
+//         setTimeout(myAndroidIntervalCoin, randomNum(300000, 1200000), myHeader, myImei, 0)
+//     })
+// }
+
+for (var i = 0; i < headerAndImei.myAndroidImei.length; i++) {
+    schedule.scheduleJob('0 0 ' + bossRand(7, 23, 8) + ' * * ?', function (myImei) {
+        setTimeout(myAndroidTask, randomNum(300000, 1200000), headerAndImei.myAndroidHeader, myImei, 0)
+        setTimeout(myAndroidIntervalCoin, randomNum(300000, 1200000), headerAndImei.myAndroidHeader, myImei, 0)
+    }.bind(null,headerAndImei.myAndroidImei[i] + ""))
 }
 
 
