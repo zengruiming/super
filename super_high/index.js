@@ -2,7 +2,6 @@ var request = require('request')
 var schedule = require('node-schedule')
 var task = require('./service/zouluzhuan/task')
 var query = require('./service/zouluzhuan/query')
-var login = require('./service/zouluzhuan/login')
 var withdraws = require('./service/zouluzhuan/withdraws')
 var randomNum = require('./utils/randomNum')
 var bossRand = require('./utils/bossRand')
@@ -10,7 +9,7 @@ var getNowFormatDate = require('./utils/getNowFormatDate')
 var headerAndImei = require('./domain/zouluzhuan/headerAndImei')
 var quzouTask = require('./service/quzou/task')
 var quzouHeader = require('./domain/quzou/header')
-var num = 0, myIos = {}, myStep = 0
+var num = 0, myIos = {}, myStep = 0, myTimes = ""
 
 
 // 查询
@@ -24,44 +23,63 @@ function myWithdraws(myHeader, myImei) {
     withdraws.withdrawsConfirm(myHeader, myImei, 100)
 }
 
-// 登录
-function mylogin(myHeader, myImei, myAllTask) {
-    myAllTask.memberIndex(myHeader, myImei)//登录
-    setTimeout(myAllTask.signCoin, 1000, myHeader, myImei)
-    setTimeout(myAllTask.signCoinDouble, 21000, myHeader, myImei)
+// 更新登录信息
+function myUpdate(myHeader, myImei, myAllTask) {
     // 更新步数
     myStep = randomNum(8001, 20001)
     myAllTask.updateAmountStep(myHeader, myImei, myStep)
+    // 登录
+    myStep = randomNum(8001, 20001)
+    myAllTask.homeTab(myHeader, myImei)
+    myAllTask.homeStep(myHeader, myImei, '1990-01-01', 0)
+    myAllTask.memberIndex(myHeader, myImei)
+    myAllTask.newAdControl(myHeader, myImei, 'jili')
+    myAllTask.memberIndex(myHeader, '00322add0a8252f3f6c7a9a134d47df9af87e821')
+    myAllTask.versionIndex(myHeader, myImei)
+    myAllTask.newAdControl(myHeader, myImei, 'xinxiliu')
+    myAllTask.homeTimestamp(myHeader, myImei)
+    setTimeout(myAllTask.signCoin, 1000, myHeader, myImei)
+    myAllTask.homeStep(myHeader, myImei, getNowFormatDate(), myStep)
+    myAllTask.homeStep(myHeader, myImei, getNowFormatDate(), myStep)
+    // 签到翻倍
+    setTimeout(myAllTask.signCoinDouble, 21000, myHeader, myImei)
+    setTimeout(myAllTask.advertisementCount, 22000, myHeader, myImei)
     // 兑换步数
-    setTimeout(myAllTask.exchangedCoin,62000,myHeader, myImei, myStep)
+    setTimeout(myAllTask.exchangedCoin, 62000, myHeader, myImei, myStep)
 }
 
-// 任务
-function myTask(myHeader, myImei, myAllTask, times) {
-    times++;
-    myAllTask.memberIndex(myHeader, myImei)//登录
-    if (times <= 6) myAllTask.advertisementCount(myHeader, myImei) //广告
-    // if (times == 8) myAllTask.exchangedCoin(myHeader, myImei, randomNum(10001, 20001)) //步数
-    if (times <= 15) {
-        myAllTask.turntableCoin(myHeader, myImei) //幸运大转盘
-        setTimeout(myTask, randomNum(30001, 60000), myHeader, myImei, myAllTask, times)
-    } else {
-        myAllTask.chestcoin(myHeader, myImei)
-    }
-    // console.log('--> 第' + times + '次')
+// 登录
+function mylogin(myHeader, myImei, myAllTask) {
+    myStep = randomNum(8001, 20001)
+    myAllTask.homeTab(myHeader, myImei)
+    myAllTask.homeStep(myHeader, myImei, '1990-01-01', 0)
+    myAllTask.memberIndex(myHeader, myImei)
+    myAllTask.newAdControl(myHeader, myImei, 'jili')
+    myAllTask.memberIndex(myHeader, '00322add0a8252f3f6c7a9a134d47df9af87e821')
+    myAllTask.versionIndex(myHeader, myImei)
+    myAllTask.newAdControl(myHeader, myImei, 'xinxiliu')
+    myAllTask.homeTimestamp(myHeader, myImei)
+    setTimeout(myAllTask.signCoin, 1000, myHeader, myImei)
+    myAllTask.homeStep(myHeader, myImei, getNowFormatDate(), myStep)
+    myAllTask.homeStep(myHeader, myImei, getNowFormatDate(), myStep)
 }
 
 // 循环刷分
 function myIntervalCoin(myHeader, myImei, myAllTask, times) {
     times++;
+    if (times == 1) mylogin(myHeader, myImei, myAllTask) //登录
     myAllTask.memberIndex(myHeader, myImei)//登录
-    num = randomNum(0, 3)
-    if (num == 0) myAllTask.newsVideoCoin(myHeader, myImei) //刷新闻视频
-    if (num == 1) myAllTask.videoCoin(myHeader, myImei) //看推荐视频
-    if (num == 2) myAllTask.cardReceiveCoin(myHeader, myImei) //刮卡奖励
-    if (num == 3 && times % 2 == 1) myAllTask.randCoin(myHeader, myImei, randomNum(15, 18)) //首页随机金币
-    if (times <= 50) {
+    num = randomNum(1, 4)
+    if (num == 1) myAllTask.newsVideoCoin(myHeader, myImei) //刷新闻视频
+    if (num == 2) myAllTask.videoCoin(myHeader, myImei) //看推荐视频
+    if (num == 3) myAllTask.cardReceiveCoin(myHeader, myImei) //刮卡奖励
+    if (num == 4) myAllTask.turntableCoin(myHeader, myImei) //幸运大转盘
+    if (num == 4 && times % 3 == 1) setTimeout(myAllTask.randCoin, randomNum(10001, 20000), myHeader, myImei, randomNum(14, 26)) //首页随机金币
+    myAllTask.advertisementCount(myHeader, myImei)//广告
+    if (times < 60) {
         setTimeout(myIntervalCoin, randomNum(30001, 40000), myHeader, myImei, myAllTask, times)
+    } else {
+        myAllTask.chestcoin(myHeader, myImei)
     }
 }
 
@@ -70,26 +88,22 @@ for (var i = 0; i < headerAndImei.myIosImei.length; i++) {
     myIos[headerAndImei.myIosImei[i]] = headerAndImei.myIosHeader[i]
 }
 for (var key in myIos) {
-    //登录
-    schedule.scheduleJob('0 0 7 * * ?', function (key) {
-        setTimeout(mylogin, randomNum(1800000, 3600000), myIos[key], key, task.iosTask)
+    myTimes = bossRand(8, 23, 8)
+    schedule.scheduleJob('0 0 ' + myTimes.split(',')[0] + ' * * ?', function (key) {
+        setTimeout(myUpdate, randomNum(0, 300000), myIos[key], key, task.iosTask)
     }.bind(null, key))
-    //任务
-    schedule.scheduleJob('0 0 ' + bossRand(8, 23, 8) + ' * * ?', function (key) {
-        setTimeout(myTask, randomNum(300000, 1200000), myIos[key], key, task.iosTask, 0)
+    schedule.scheduleJob('0 0 ' + myTimes + ' * * ?', function (key) {
         setTimeout(myIntervalCoin, randomNum(300000, 1200000), myIos[key], key, task.iosTask, 0)
     }.bind(null, key))
 }
 
 // 日常刷-android
 for (var i = 0; i < headerAndImei.myAndroidImei.length; i++) {
-    //登录
-    schedule.scheduleJob('0 0 7 * * ?', function (myImei) {
-        setTimeout(mylogin, randomNum(1800000, 3600000), headerAndImei.myAndroidHeader, myImei, task.androidTask)
+    myTimes = bossRand(8, 23, 8)
+    schedule.scheduleJob('0 0 ' + myTimes.split(',')[0] + ' * * ?', function (myImei) {
+        setTimeout(myUpdate, randomNum(0, 300000), headerAndImei.myAndroidHeader, myImei, task.androidTask)
     }.bind(null, headerAndImei.myAndroidImei[i] + ""))
-    //任务
-    schedule.scheduleJob('0 0 ' + bossRand(8, 23, 8) + ' * * ?', function (myImei) {
-        setTimeout(myTask, randomNum(300000, 1200000), headerAndImei.myAndroidHeader, myImei, task.androidTask, 0)
+    schedule.scheduleJob('0 0 ' + myTimes + ' * * ?', function (myImei) {
         setTimeout(myIntervalCoin, randomNum(300000, 1200000), headerAndImei.myAndroidHeader, myImei, task.androidTask, 0)
     }.bind(null, headerAndImei.myAndroidImei[i] + ""))
 }

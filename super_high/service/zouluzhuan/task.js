@@ -3,6 +3,85 @@ var request = require('request');
 var randomNum = require('../../utils/randomNum');
 
 function IosTask() {
+//认证01
+    this.homeTab = function (header, imei) {
+        request({
+            url: 'https://api.xiaomuyu888.com/api/home/tab',
+            method: 'POST',
+            gzip: true,
+            headers: header,
+            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myIosVersion
+        }, function (error, res, body) {
+            if (!error && res.statusCode == 200) {
+                //输出返回的内容
+                console.log('认证01:' + body)
+            }
+        })
+    }
+
+//认证02
+    this.homeStep = function (header, imei, time, totalStep) {
+        request({
+            url: 'https://api.xiaomuyu888.com/api/home/step',
+            method: 'POST',
+            gzip: true,
+            headers: header,
+            body: 'device=ios&imei=' + imei + '&source=ios&time=' + time + '&total_step=' + totalStep + '&version=' + version.myIosVersion
+        }, function (error, res, body) {
+            if (!error && res.statusCode == 200) {
+                //输出返回的内容
+                console.log('认证02:' + body)
+            }
+        })
+    }
+
+//认证03
+    this.newAdControl = function (header, imei, type) {
+        request({
+            url: 'https://api.xiaomuyu888.com/api/Advertisement/newAdControl',
+            method: 'POST',
+            gzip: true,
+            headers: header,
+            body: 'device=ios&imei=' + imei + '&source=ios&type=' + type + '&version=' + version.myIosVersion
+        }, function (error, res, body) {
+            if (!error && res.statusCode == 200) {
+                //输出返回的内容
+                console.log('认证03:' + body)
+            }
+        })
+    }
+
+//认证04
+    this.versionIndex = function (header, imei) {
+        request({
+            url: 'https://api.xiaomuyu888.com/api/version/index',
+            method: 'POST',
+            gzip: true,
+            headers: header,
+            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myIosVersion + '&version_code=' + version.myIosVersion + '&version_device=2'
+        }, function (error, res, body) {
+            if (!error && res.statusCode == 200) {
+                //输出返回的内容
+                console.log('认证04:' + body)
+            }
+        })
+    }
+
+//认证05
+    this.homeTimestamp = function (header, imei) {
+        request({
+            url: 'https://api.xiaomuyu888.com/api/home/timestamp',
+            method: 'POST',
+            gzip: true,
+            headers: header,
+            body: 'device=ios&imei=' + imei + '&source=ios&version=' + version.myIosVersion
+        }, function (error, res, body) {
+            if (!error && res.statusCode == 200) {
+                //输出返回的内容
+                console.log('认证05:' + body)
+            }
+        })
+    }
 
 //登录
     this.memberIndex = function (header, imei) {
@@ -70,12 +149,13 @@ function IosTask() {
 
 //广告
     this.advertisementCount = function (header, imei) {
+        var arr = ['tengxun', 'toutiao']
         request({
             url: 'https://api.xiaomuyu888.com/api/Advertisement/count',
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'ad_type=tengxun&device=ios&imei=' + imei + '&source=ios&version=' + version.myIosVersion
+            body: 'ad_type=' + arr[randomNum(0, 1)] + '&device=ios&imei=' + imei + '&source=ios&version=' + version.myIosVersion
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -200,7 +280,7 @@ function IosTask() {
 
 //刮卡奖励
     this.cardReceiveCoin = function (header, imei) {
-        var arr = [5, 10, 15]
+        var arr = [2, 4, 6]
         request({
             url: 'https://api.xiaomuyu888.com/api/Card/cardList',
             method: 'post',
@@ -227,6 +307,22 @@ function IosTask() {
         })
     }
 
+//更新设备
+    this.updateUmengDeviceToken = function (header, imei, tokens) {
+        request({
+            url: 'https://api.xiaomuyu888.com/api/member/updateUmengDeviceToken',
+            method: 'POST',
+            gzip: true,
+            headers: header,
+            body: 'device=ios&device_tokens=' + tokens + '&imei=' + imei + '&source=ios&version=' + version.myIosVersion
+        }, function (error, res, body) {
+            if (!error && res.statusCode == 200) {
+                //输出返回的内容
+                console.log('更新设备:' + body)
+            }
+        })
+    }
+
 };
 
 module.exports.iosTask = new IosTask();
@@ -236,10 +332,89 @@ function AndroidTask() {
     var source = 'Z1006'
     var versionCode = '140'
 
+//认证01
+    this.homeTab = function (header, imei) {
+        request({
+            url: 'http://api.xiaomuyu888.com/api/home/tab',
+            method: 'POST',
+            gzip: true,
+            headers: header,
+            body: 'imei=' + imei + '&device=' + device + '&version=' + version.myAndroidVersion + '&source=' + source + '&version_code=' + versionCode
+        }, function (error, res, body) {
+            if (!error && res.statusCode == 200) {
+                //输出返回的内容
+                console.log('认证01:' + body)
+            }
+        })
+    }
+
+//认证02
+    this.homeStep = function (header, imei, time, totalStep) {
+        request({
+            url: 'http://api.xiaomuyu888.com/api/member/register',
+            method: 'POST',
+            gzip: true,
+            headers: header,
+            body: 'imei=' + imei + '&device=' + device + '&version=' + version.myAndroidVersion + '&source=' + source + '&version_code=' + versionCode
+        }, function (error, res, body) {
+            if (!error && res.statusCode == 200) {
+                //输出返回的内容
+                console.log('认证02:' + body)
+            }
+        })
+    }
+
+//认证03
+    this.newAdControl = function (header, imei, type) {
+        request({
+            url: 'http://api.xiaomuyu888.com/api/Advertisement/newAdControl',
+            method: 'POST',
+            gzip: true,
+            headers: header,
+            body: 'type=' + type + '&imei=' + imei + '&device=' + device + '&version=' + version.myAndroidVersion + '&source=' + source + '&version_code=' + versionCode
+        }, function (error, res, body) {
+            if (!error && res.statusCode == 200) {
+                //输出返回的内容
+                console.log('认证03:' + body)
+            }
+        })
+    }
+
+//认证04
+    this.versionIndex = function (header, imei) {
+        request({
+            url: 'http://api.xiaomuyu888.com/api/version/index',
+            method: 'POST',
+            gzip: true,
+            headers: header,
+            body: 'version_device=1&imei=' + imei + '&device=' + device + '&version=' + version.myAndroidVersion + '&source=' + source + '&version_code=' + versionCode
+        }, function (error, res, body) {
+            if (!error && res.statusCode == 200) {
+                //输出返回的内容
+                console.log('认证04:' + body)
+            }
+        })
+    }
+
+//认证05
+    this.homeTimestamp = function (header, imei) {
+        request({
+            url: 'http://api.xiaomuyu888.com/api/member/signCoin?device=' + device + '&version_code=' + versionCode + '&source=' + source + '&imei=' + imei + '&version=' + version.myAndroidVersion,
+            method: 'GET',
+            gzip: true,
+            headers: header,
+        }, function (error, res, body) {
+            if (!error && res.statusCode == 200) {
+                //输出返回的内容
+                console.log('认证05:' + body)
+            }
+        })
+    }
+
 //登录
     this.memberIndex = function (header, imei) {
         request({
-            url: 'http://api.xiaomuyu888.com/api/member/index?device=' + device + '&version_code=' + versionCode + '&source=' + source + '&imei=' + imei + '&version=' + version.myIosVersion,
+            url: 'http://api.xiaomuyu888.com/api/member/index?device=' + device + '&version_code=' + versionCode + '&source=' + source + '&imei=' + imei + '&version=' + version.myAndroidVersion,
             method: 'GET',
             gzip: true,
             headers: header,
@@ -258,7 +433,7 @@ function AndroidTask() {
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'amount_step=' + amountStep + '&imei=' + imei + '&device=' + device + '&version=' + version.myIosVersion + '&source=' + source + '&version_code=' + versionCode
+            body: 'amount_step=' + amountStep + '&imei=' + imei + '&device=' + device + '&version=' + version.myAndroidVersion + '&source=' + source + '&version_code=' + versionCode
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
@@ -299,23 +474,24 @@ function AndroidTask() {
         })
     }
 
-//步数1-1
+//广告
     this.advertisementCount = function (header, imei) {
+        var arr = ['tengxun', 'toutiao']
         request({
             url: 'http://api.xiaomuyu888.com/api/Advertisement/count',
             method: 'POST',
             gzip: true,
             headers: header,
-            body: 'ad_type=toutiao&imei=' + imei + '&device=' + device + '&version=' + version.myAndroidVersion + '&source=' + source + '&version_code=' + versionCode
+            body: 'ad_type=' + arr[randomNum(0, 1)] + '&imei=' + imei + '&device=' + device + '&version=' + version.myAndroidVersion + '&source=' + source + '&version_code=' + versionCode
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('步数1-1:' + body)
+                console.log('广告:' + body)
             }
         })
     }
 
-//步数1-2
+//步数
     this.exchangedCoin = function (header, imei, num) {
         request({
             url: 'http://api.xiaomuyu888.com/api/member/exchangedCoin',
@@ -326,7 +502,7 @@ function AndroidTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('步数1-2:' + body)
+                console.log('步数:' + body)
             }
         })
     }
@@ -454,6 +630,22 @@ function AndroidTask() {
                         console.log('刮卡奖励:' + body)
                     })
                 }
+            }
+        })
+    }
+
+//更新设备
+    this.updateUmengDeviceToken = function (header, imei, deviceTokens) {
+        request({
+            url: 'http://api.xiaomuyu888.com/api/member/updateUmengDeviceToken',
+            method: 'POST',
+            gzip: true,
+            headers: header,
+            body: 'device_tokens=' + deviceTokens + '&imei=' + imei + '&device=' + device + '&version=' + version.myAndroidVersion + '&source=' + source + '&version_code=' + versionCode
+        }, function (error, res, body) {
+            if (!error && res.statusCode == 200) {
+                //输出返回的内容
+                console.log('更新设备:' + body)
             }
         })
     }
