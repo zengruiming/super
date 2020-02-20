@@ -9,7 +9,7 @@ var getNowFormatDate = require('./utils/getNowFormatDate')
 var headerAndImei = require('./domain/zouluzhuan/headerAndImei')
 var quzouTask = require('./service/quzou/task')
 var quzouHeader = require('./domain/quzou/header')
-var num = 0, myIos = {}, myStep = 0, myTimes = ""
+var num = 0, myIos = {}, myStep = 0, myTimes = "", mySetTimes = []
 
 
 // 查询
@@ -38,7 +38,7 @@ function myUpdate(myHeader, myImei, myAllTask) {
     myAllTask.versionIndex(myHeader, myImei)
     myAllTask.newAdControl(myHeader, myImei, 'xinxiliu')
     myAllTask.homeTimestamp(myHeader, myImei)
-    setTimeout(myAllTask.signCoin, 1000, myHeader, myImei)
+    myAllTask.signCoin(myHeader, myImei)
     myAllTask.homeStep(myHeader, myImei, getNowFormatDate(), myStep)
     myAllTask.homeStep(myHeader, myImei, getNowFormatDate(), myStep)
     // 签到翻倍
@@ -59,7 +59,7 @@ function mylogin(myHeader, myImei, myAllTask) {
     myAllTask.versionIndex(myHeader, myImei)
     myAllTask.newAdControl(myHeader, myImei, 'xinxiliu')
     myAllTask.homeTimestamp(myHeader, myImei)
-    setTimeout(myAllTask.signCoin, 1000, myHeader, myImei)
+    myAllTask.signCoin(myHeader, myImei)
     myAllTask.homeStep(myHeader, myImei, getNowFormatDate(), myStep)
     myAllTask.homeStep(myHeader, myImei, getNowFormatDate(), myStep)
 }
@@ -87,27 +87,40 @@ function myIntervalCoin(myHeader, myImei, myAllTask, times) {
 for (var i = 0; i < headerAndImei.myIosImei.length; i++) {
     myIos[headerAndImei.myIosImei[i]] = headerAndImei.myIosHeader[i]
 }
-for (var key in myIos) {
-    myTimes = bossRand(8, 23, 8)
-    schedule.scheduleJob('0 0 ' + myTimes.split(',')[0] + ' * * ?', function (key) {
-        setTimeout(myUpdate, randomNum(0, 300000), myIos[key], key, task.iosTask)
-    }.bind(null, key))
-    schedule.scheduleJob('0 0 ' + myTimes + ' * * ?', function (key) {
-        setTimeout(myIntervalCoin, randomNum(300000, 1200000), myIos[key], key, task.iosTask, 0)
-    }.bind(null, key))
-}
+
+function run() {
+    for (var key in myIos) {
+        myTimes = bossRand(8, 23, 8)
+        mySetTimes.push(schedule.scheduleJob('0 0 ' + Math.min.apply(null, myTimes.split(',')) + ' * * ?', function (key) {
+            setTimeout(myUpdate, randomNum(0, 300000), myIos[key], key, task.iosTask)
+        }.bind(null, key)))
+        mySetTimes.push(schedule.scheduleJob('0 0 ' + myTimes + ' * * ?', function (key) {
+            setTimeout(myIntervalCoin, randomNum(300000, 1200000), myIos[key], key, task.iosTask, 0)
+        }.bind(null, key)))
+    }
 
 // 日常刷-android
-for (var i = 0; i < headerAndImei.myAndroidImei.length; i++) {
-    myTimes = bossRand(8, 23, 8)
-    schedule.scheduleJob('0 0 ' + myTimes.split(',')[0] + ' * * ?', function (myImei) {
-        setTimeout(myUpdate, randomNum(0, 300000), headerAndImei.myAndroidHeader, myImei, task.androidTask)
-    }.bind(null, headerAndImei.myAndroidImei[i] + ""))
-    schedule.scheduleJob('0 0 ' + myTimes + ' * * ?', function (myImei) {
-        setTimeout(myIntervalCoin, randomNum(300000, 1200000), headerAndImei.myAndroidHeader, myImei, task.androidTask, 0)
-    }.bind(null, headerAndImei.myAndroidImei[i] + ""))
+    for (var i = 0; i < headerAndImei.myAndroidImei.length; i++) {
+        myTimes = bossRand(8, 23, 8)
+        mySetTimes.push(schedule.scheduleJob('0 0 ' + Math.min.apply(null, myTimes.split(',')) + ' * * ?', function (myImei) {
+            setTimeout(myUpdate, randomNum(0, 300000), headerAndImei.myAndroidHeader, myImei, task.androidTask)
+        }.bind(null, headerAndImei.myAndroidImei[i] + "")))
+        mySetTimes.push(schedule.scheduleJob('0 0 ' + myTimes + ' * * ?', function (myImei) {
+            setTimeout(myIntervalCoin, randomNum(300000, 1200000), headerAndImei.myAndroidHeader, myImei, task.androidTask, 0)
+        }.bind(null, headerAndImei.myAndroidImei[i] + "")))
+    }
 }
 
+//启动每日刷
+run()
+schedule.scheduleJob('0 0 1 * * ? ', function () {
+    for (var i = 0; i < mySetTimes.length; i++) {
+        mySetTimes[i].cancel()
+        console.log('取消成功')
+    }
+    mySetTimes.length = 0
+    run()
+})
 
 // 无限刷
 // for (var i=0;i<1000;i++) {
