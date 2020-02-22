@@ -35,6 +35,4 @@ var quzouHeader = require('./domain/quzou/header')
 //     run()
 // })
 
-// task.iosTask.updateAmountStep(headerAndImei.myIosHeader[1],headerAndImei.myIosImei[1],318693)
-// task.iosTask.memberIndex(headerAndImei.myIosHeader[1],headerAndImei.myIosImei[1])
 // task.iosTask.updateUmengDeviceToken(headerAndImei.myIosHeader[1],headerAndImei.myIosImei[1],'2c40fa2a2236163a78ca2bd5f8a377a142f950fae79f86e54d310d92b80bdb04')

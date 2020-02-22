@@ -78,7 +78,7 @@ for (var i = 0; i < headerAndImei.myIosImei.length; i++) {
 
 function run() {
     for (var key in myIos) {
-        myTimes = bossRand(8, 23, 8)
+        myTimes = bossRand(6, 13, 8)
         mySetTimes.push(schedule.scheduleJob('0 0 ' + Math.min.apply(null, myTimes.split(',')) + ' * * ?', function (key) {
             setTimeout(myUpdate, randomNum(0, 300000), myIos[key], key, task.iosTask)
         }.bind(null, key)))
