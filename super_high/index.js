@@ -15,7 +15,7 @@ var num = 0, myIos = {}, myStep = 0, myTimes = "", mySetTimes = []
 function myUpdate(myHeader, myImei, myAllTask) {
     // 更新步数
     myStep = randomNum(10001, 20001)
-    myAllTask.updateAmountStep(myHeader, myImei, myStep)
+    if (myImei !== headerAndImei.myIosImei[0]) myAllTask.updateAmountStep(myHeader, myImei, myStep)
     // 登录
     myStep = randomNum(10001, 20001)
     myAllTask.homeTab(myHeader, myImei)
