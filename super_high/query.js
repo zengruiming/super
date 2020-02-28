@@ -18,13 +18,13 @@ function myQuery(myHeader, myImei) {
 
 // 提现
 function myWithdraws(myHeader, myImei) {
-    withdraws.withdrawsConfirm(myHeader, myImei, 100)
+    withdraws.withdrawsConfirm(myHeader, myImei, 1)
 }
 
 // myWithdraws(headerAndImei.myIosHeader[1],headerAndImei.myIosImei[1]);//提现
 
 // task.iosTask.updateAmountStep(headerAndImei.myIosHeader[1],headerAndImei.myIosImei[1],118693)//更新总步数
-task.iosTask.memberIndex(headerAndImei.myIosHeader[1],headerAndImei.myIosImei[1])//查账户信息
+// task.iosTask.memberIndex(headerAndImei.myIosHeader[1],headerAndImei.myIosImei[1])//查账户信息
 
 // myQuery(headerAndImei.myIosHeader[1],headerAndImei.myIosImei[1]);//查收益详情、账户金币和提现详情
 

@@ -26,7 +26,7 @@ function headerAndImei() {
     ]
     this.myIosImei = [
         'dc8349b88e14a402b617c852b2b260b648b27e5f',
-        'a9fecc287fdd2ef1bf498737e562d6362612c259',
+        // 'a9fecc287fdd2ef1bf498737e562d6362612c259',
     ]
 
     this.myAndroidHeader = {
