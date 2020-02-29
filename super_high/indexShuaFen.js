@@ -62,7 +62,8 @@ function myIntervalCoin(myHeader, myImei, myAllTask, times) {
     if (num == 2) myAllTask.videoCoin(myHeader, myImei) //看推荐视频
     if (num == 3) myAllTask.cardReceiveCoin(myHeader, myImei) //刮卡奖励
     if (num == 4) myAllTask.turntableCoin(myHeader, myImei) //幸运大转盘
-    if (num == 4 && times % 3 == 1) setTimeout(myAllTask.randCoin, randomNum(10001, 20000), myHeader, myImei, randomNum(14, 26)) //首页随机金币
+    if (myAllTask == task.androidTask && num == 4 && times % 3 == 1) setTimeout(myAllTask.randCoin, randomNum(10001, 20000), myHeader, myImei, randomNum(5, 15)) //首页随机金币
+    if (myAllTask == task.iosTask && num == 4 && times % 3 == 1) setTimeout(myAllTask.randCoin, randomNum(10001, 20000), myHeader, myImei, randomNum(11, 26)) //首页随机金币
     if (num != 1) myAllTask.advertisementCount(myHeader, myImei)//广告
     if (times < 70) {
         setTimeout(myIntervalCoin, randomNum(30001, 40000), myHeader, myImei, myAllTask, times)
