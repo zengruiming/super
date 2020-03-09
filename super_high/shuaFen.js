@@ -30,7 +30,12 @@ function run() {
     }
 }*/
 
-setInterval(function () {
+/*setInterval(function () {
 task.iosTask.randCoin(headerAndImei.myIosHeader[0],headerAndImei.myIosImei[0],randomNum(14, 26))
+})*/
+
+
+setInterval(function () {
+task.androidTask.randCoin(headerAndImei.myAndroidHeader,headerAndImei.myIosImei[0],randomNum(14, 26))
 })
 
