@@ -26,7 +26,7 @@ function myWithdraws(myHeader, myImei) {
 // task.iosTask.updateAmountStep(headerAndImei.myIosHeader[1],headerAndImei.myIosImei[1],118693)//更新总步数
 // task.iosTask.memberIndex(headerAndImei.myIosHeader[1],headerAndImei.myIosImei[1])//查账户信息
 
-// myQuery(headerAndImei.myIosHeader[1],headerAndImei.myIosImei[1]);//查收益详情、账户金币和提现详情
+myQuery(headerAndImei.myIosHeader[0],headerAndImei.myIosImei[0]);//查收益详情、账户金币和提现详情
 
 // task.iosTask.updateUmengDeviceToken(headerAndImei.myIosHeader[0],headerAndImei.myIosImei[0],'bc40fa2a2236163a78ca2bd5f8a377a1f2f950fae79f86e54d310d92b80bdf03')//更新DeviceToken
 // task.iosTask.updateUmengDeviceToken(headerAndImei.myIosHeader[1],headerAndImei.myIosImei[1],'c3d1a3fa6145227d76ba3bd6d6a357a242f330f2e78d82c24de12c76b38c3612')//更新DeviceToken
