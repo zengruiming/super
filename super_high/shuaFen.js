@@ -30,12 +30,12 @@ function run() {
     }
 }*/
 
-setInterval(function () {
-task.iosTask.randCoin(headerAndImei.myIosHeader[0],headerAndImei.myIosImei[0],randomNum(14, 26))
-},10)
-
-
 /*setInterval(function () {
+task.iosTask.randCoin(headerAndImei.myIosHeader[0],headerAndImei.myIosImei[0],randomNum(14, 26))
+},10)*/
+
+
+setInterval(function () {
 task.androidTask.randCoin(headerAndImei.myAndroidHeader,headerAndImei.myAndroidImei[0],randomNum(14, 26))
-},1)*/
+},8)
 
