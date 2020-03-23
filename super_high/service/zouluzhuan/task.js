@@ -14,7 +14,7 @@ function IosTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('认证01:' + body)
+                // console.log('认证01:' + body)
             }
         })
     }
@@ -30,7 +30,7 @@ function IosTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('认证02:' + body)
+                // console.log('认证02:' + body)
             }
         })
     }
@@ -46,7 +46,7 @@ function IosTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('认证03:' + body)
+                // console.log('认证03:' + body)
             }
         })
     }
@@ -62,7 +62,7 @@ function IosTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('认证04:' + body)
+                // console.log('认证04:' + body)
             }
         })
     }
@@ -78,7 +78,7 @@ function IosTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('认证05:' + body)
+                // console.log('认证05:' + body)
             }
         })
     }
@@ -94,7 +94,7 @@ function IosTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('登录:' + body)
+                // console.log('登录:' + body)
             }
         })
     }
@@ -110,7 +110,7 @@ function IosTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('更新总步数:' + body)
+                // console.log('更新总步数:' + body)
             }
         })
     }
@@ -126,7 +126,7 @@ function IosTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('签到:' + body)
+                // console.log('签到:' + body)
             }
         })
     }
@@ -142,7 +142,7 @@ function IosTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('签到翻倍:' + body)
+                // console.log('签到翻倍:' + body)
             }
         })
     }
@@ -159,7 +159,7 @@ function IosTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('广告:' + body)
+                // console.log('广告:' + body)
             }
         })
     }
@@ -175,7 +175,7 @@ function IosTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('步数:' + body)
+                // console.log('步数:' + body)
             }
         })
     }
@@ -191,7 +191,7 @@ function IosTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('刷新闻视频:' + body)
+                // console.log('刷新闻视频:' + body)
             }
         })
     }
@@ -207,7 +207,7 @@ function IosTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('看推荐视频:' + body)
+                // console.log('看推荐视频:' + body)
             }
         })
     }
@@ -241,7 +241,7 @@ function IosTask() {
             if (!error && res.statusCode == 200 && body.indexOf("coin") != -1) {
                 if (JSON.parse(body).data.coin > 0) {
                     //输出返回的内容
-                    console.log('幸运大转盘首页:' + JSON.parse(body).data.coin)
+                    // console.log('幸运大转盘首页:' + JSON.parse(body).data.coin)
                     request({
                         url: 'http://api.xiaomuyu888.com/api/turntable/double?imei=' + imei + '&jsoncallback=callback',
                         method: 'post',
@@ -251,7 +251,7 @@ function IosTask() {
                     }, function (error, res, body) {
                         if (!error && res.statusCode == 200) {
                             //输出返回的内容
-                            console.log('幸运大转盘金币:' + body)
+                            // console.log('幸运大转盘金币:' + body)
                         }
                     })
                 }
@@ -272,7 +272,7 @@ function IosTask() {
             }, function (error, res, body) {
                 if (!error && res.statusCode == 200) {
                     //输出返回的内容
-                    console.log('开宝箱:' + body)
+                    // console.log('开宝箱:' + body)
                 }
             })
         }
@@ -290,7 +290,7 @@ function IosTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200 && body.indexOf("surplus_numbers") != -1) {
                 //输出返回的内容
-                console.log('刮卡:' + JSON.parse(body).data['surplus_numbers'])
+                // console.log('刮卡:' + JSON.parse(body).data['surplus_numbers'])
                 if (JSON.parse(body).data['surplus_numbers'] != 0) {
                     request({
                         url: 'https://api.xiaomuyu888.com/api/Card/cardReceiveCoin',
@@ -300,7 +300,7 @@ function IosTask() {
                         body: 'coin=' + arr[randomNum(0, 2)] + '&device=ios&id=' + randomNum(2, 20) + '&imei=' + imei + '&is_double=1&source=ios&version=' + version.myIosVersion
                     }, function (error, res, body) {
                         //输出返回的内容
-                        console.log('刮卡奖励:' + body)
+                        // console.log('刮卡奖励:' + body)
                     })
                 }
             }
@@ -318,7 +318,7 @@ function IosTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('更新设备:' + body)
+                // console.log('更新设备:' + body)
             }
         })
     }
@@ -343,7 +343,7 @@ function AndroidTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('认证01:' + body)
+                // console.log('认证01:' + body)
             }
         })
     }
@@ -359,7 +359,7 @@ function AndroidTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('认证02:' + body)
+                // console.log('认证02:' + body)
             }
         })
     }
@@ -375,7 +375,7 @@ function AndroidTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('认证03:' + body)
+                // console.log('认证03:' + body)
             }
         })
     }
@@ -391,7 +391,7 @@ function AndroidTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('认证04:' + body)
+                // console.log('认证04:' + body)
             }
         })
     }
@@ -406,7 +406,7 @@ function AndroidTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('认证05:' + body)
+                // console.log('认证05:' + body)
             }
         })
     }
@@ -421,7 +421,7 @@ function AndroidTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('登录:' + body)
+                // console.log('登录:' + body)
             }
         })
     }
@@ -437,7 +437,7 @@ function AndroidTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('更新总步数:' + body)
+                // console.log('更新总步数:' + body)
             }
         })
     }
@@ -453,7 +453,7 @@ function AndroidTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('签到:' + body)
+                // console.log('签到:' + body)
             }
         })
     }
@@ -469,7 +469,7 @@ function AndroidTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('签到翻倍:' + body)
+                // console.log('签到翻倍:' + body)
             }
         })
     }
@@ -486,7 +486,7 @@ function AndroidTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('广告:' + body)
+                // console.log('广告:' + body)
             }
         })
     }
@@ -502,7 +502,7 @@ function AndroidTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('步数:' + body)
+                // console.log('步数:' + body)
             }
         })
     }
@@ -518,7 +518,7 @@ function AndroidTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('刷新闻视频:' + body)
+                // console.log('刷新闻视频:' + body)
             }
         })
     }
@@ -534,7 +534,7 @@ function AndroidTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('看推荐视频:' + body)
+                // console.log('看推荐视频:' + body)
             }
         })
     }
@@ -568,7 +568,7 @@ function AndroidTask() {
             if (!error && res.statusCode == 200 && body.indexOf("coin") != -1) {
                 if (JSON.parse(body).data.coin > 0) {
                     //输出返回的内容
-                    console.log('幸运大转盘首页:' + JSON.parse(body).data.coin)
+                    // console.log('幸运大转盘首页:' + JSON.parse(body).data.coin)
                     request({
                         url: 'http://api.xiaomuyu888.com/api/turntable/double?imei=' + imei + '&jsoncallback=callback',
                         method: 'post',
@@ -578,7 +578,7 @@ function AndroidTask() {
                     }, function (error, res, body) {
                         if (!error && res.statusCode == 200) {
                             //输出返回的内容
-                            console.log('幸运大转盘金币:' + body)
+                            // console.log('幸运大转盘金币:' + body)
                         }
                     })
                 }
@@ -599,7 +599,7 @@ function AndroidTask() {
             }, function (error, res, body) {
                 if (!error && res.statusCode == 200) {
                     //输出返回的内容
-                    console.log('开宝箱:' + body)
+                    // console.log('开宝箱:' + body)
                 }
             })
         }
@@ -617,7 +617,7 @@ function AndroidTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200 && body.indexOf("surplus_numbers") != -1) {
                 //输出返回的内容
-                console.log('刮卡:' + JSON.parse(body).data['surplus_numbers'])
+                // console.log('刮卡:' + JSON.parse(body).data['surplus_numbers'])
                 if (JSON.parse(body).data['surplus_numbers'] != 0) {
                     request({
                         url: 'http://api.xiaomuyu888.com/api/Card/cardReceiveCoin',
@@ -627,7 +627,7 @@ function AndroidTask() {
                         body: 'coin=' + arr[randomNum(0, 2)] + '&step=&is_double=0&id=' + randomNum(2, 20) + '&double=0&imei=' + imei + '&device=' + device + '&version=' + version.myAndroidVersion + '&source=' + source + '&version_code=' + versionCode
                     }, function (error, res, body) {
                         //输出返回的内容
-                        console.log('刮卡奖励:' + body)
+                        // console.log('刮卡奖励:' + body)
                     })
                 }
             }
@@ -645,7 +645,7 @@ function AndroidTask() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('更新设备:' + body)
+                // console.log('更新设备:' + body)
             }
         })
     }
