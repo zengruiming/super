@@ -65,7 +65,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('登录:' + body)
+            // console.log('登录:' + body)
         }
     })
 
@@ -78,7 +78,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('领步数1-1:' + body)
+            // console.log('领步数1-1:' + body)
             var resp = JSON.parse(body)
             if (resp.code == '0' && resp.data.days.length > 0) {
                 var datas = resp.data.days;
@@ -102,7 +102,7 @@ this.richang = function (header) {
                     body: JSON.stringify(saveData)
                 }, function (error, res, body) {
                     if (!error && res.statusCode == 200) {
-                        console.log('领步数1-2:' + body)
+                        // console.log('领步数1-2:' + body)
                     }
                 })
             }
@@ -118,7 +118,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('戳气球翻倍:' + body)
+            // console.log('戳气球翻倍:' + body)
         }
     })
 
@@ -132,7 +132,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('戳气球3轮奖励:' + body)
+            // console.log('戳气球3轮奖励:' + body)
         }
     })
 
@@ -146,7 +146,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('戳气球5轮奖励:' + body)
+            // console.log('戳气球5轮奖励:' + body)
         }
     })
 
@@ -160,7 +160,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('戳气球10轮奖励:' + body)
+            // console.log('戳气球10轮奖励:' + body)
         }
     })
 
@@ -174,7 +174,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('看小说1:' + body)
+            // console.log('看小说1:' + body)
         }
     })
 
@@ -188,7 +188,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('看小说1-1:' + body)
+            // console.log('看小说1-1:' + body)
         }
     })
 
@@ -202,7 +202,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('看小说2:' + body)
+            // console.log('看小说2:' + body)
         }
     })
 
@@ -216,7 +216,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('看小说2-1:' + body)
+            // console.log('看小说2-1:' + body)
         }
     })
 
@@ -230,7 +230,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('看小说3:' + body)
+            // console.log('看小说3:' + body)
         }
     })
 
@@ -244,7 +244,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('看广告1:' + body)
+            // console.log('看广告1:' + body)
         }
     })
 
@@ -258,7 +258,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('看广告2:' + body)
+            // console.log('看广告2:' + body)
         }
     })
 
@@ -272,7 +272,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('看广告3:' + body)
+            // console.log('看广告3:' + body)
         }
     })
 
@@ -286,7 +286,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('看广告4:' + body)
+            // console.log('看广告4:' + body)
         }
     })
 
@@ -299,7 +299,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('签到:' + body)
+            // console.log('签到:' + body)
         }
     })
 
@@ -312,7 +312,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('分享1:' + body)
+            // console.log('分享1:' + body)
         }
     })
 
@@ -326,7 +326,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('分享2:' + body)
+            // console.log('分享2:' + body)
         }
     })
 
@@ -340,7 +340,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('分享3:' + body)
+            // console.log('分享3:' + body)
         }
     })
 
@@ -354,7 +354,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('步数奖励1:' + body)
+            // console.log('步数奖励1:' + body)
         }
     })
 
@@ -368,7 +368,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('步数奖励2:' + body)
+            // console.log('步数奖励2:' + body)
         }
     })
 
@@ -382,7 +382,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('步数奖励视频:' + body)
+            // console.log('步数奖励视频:' + body)
         }
     })
 
@@ -396,7 +396,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('步数奖励3:' + body)
+            // console.log('步数奖励3:' + body)
         }
     })
 
@@ -410,7 +410,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('步数奖励4:' + body)
+            // console.log('步数奖励4:' + body)
         }
     })
 
@@ -424,7 +424,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('步数奖励5:' + body)
+            // console.log('步数奖励5:' + body)
         }
     })
 
@@ -438,7 +438,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('步数奖励6:' + body)
+            // console.log('步数奖励6:' + body)
         }
     })
 
@@ -451,7 +451,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('偷步数1-1:' + body)
+            // console.log('偷步数1-1:' + body)
         }
     })
 
@@ -464,7 +464,7 @@ this.richang = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('偷步数1-2-1:' + body)
+            // console.log('偷步数1-2-1:' + body)
             var resp = JSON.parse(body)
             if (resp.code == '0' && resp.data.stolenPersonId.length > 0) {
                 var numTou = randomNum(843, 1000);
@@ -477,7 +477,7 @@ this.richang = function (header) {
                 }, function (error, res, body) {
                     if (!error && res.statusCode == 200) {
                         //输出返回的内容
-                        console.log('偷步数1-2-2:' + body)
+                        // console.log('偷步数1-2-2:' + body)
                     }
                 })
             }
@@ -496,7 +496,7 @@ this.wechatShare = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('小程序分享:' + body)
+            // console.log('小程序分享:' + body)
         }
     })
 
@@ -510,7 +510,7 @@ this.wechatShare = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('小程序视频红包:' + body)
+            // console.log('小程序视频红包:' + body)
         }
     })
 }
@@ -531,7 +531,7 @@ this.games = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('戳气球增加游戏次数:' + body)
+            // console.log('戳气球增加游戏次数:' + body)
         }
     })
 
@@ -545,7 +545,7 @@ this.games = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('戳气球提交游戏分数:' + body)
+            // console.log('戳气球提交游戏分数:' + body)
         }
     })
 
@@ -562,7 +562,7 @@ this.news = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('刷新闻1-1:' + body)
+            // console.log('刷新闻1-1:' + body)
             request({
                 url: 'https://mobile01.91quzou.com/v4/lw/getReward.do',
                 method: 'POST',
@@ -572,7 +572,7 @@ this.news = function (header) {
             }, function (error, res, body) {
                 if (!error && res.statusCode == 200) {
                     //输出返回的内容
-                    console.log('刷新闻1-2:' + body)
+                    // console.log('刷新闻1-2:' + body)
                 }
             })
         }
@@ -590,7 +590,7 @@ this.videos = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('刷视频1-1:' + body)
+            // console.log('刷视频1-1:' + body)
             request({
                 url: 'https://mobile01.91quzou.com/v4/lw/getReward.do',
                 method: 'POST',
@@ -600,7 +600,7 @@ this.videos = function (header) {
             }, function (error, res, body) {
                 if (!error && res.statusCode == 200) {
                     //输出返回的内容
-                    console.log('刷视频1-2:' + body)
+                    // console.log('刷视频1-2:' + body)
                 }
             })
         }
@@ -678,7 +678,7 @@ this.gameAll = function (header,type) {
             }, function (error, res, body) {
                 if (!error && res.statusCode == 200) {
                     //输出返回的内容
-                    console.log('刷游戏:' + body)
+                    // console.log('刷游戏:' + body)
                 }
             })
         }
@@ -696,7 +696,7 @@ this.zhengDian = function (header) {
     }, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             //输出返回的内容
-            console.log('整点领红包-1:' + body)
+            // console.log('整点领红包-1:' + body)
             request({
                 url: 'https://mobile01.91quzou.com/rebate/qz/task/completeTask.do',
                 method: 'POST',
@@ -706,7 +706,7 @@ this.zhengDian = function (header) {
             }, function (error, res, body) {
                 if (!error && res.statusCode == 200) {
                     //输出返回的内容
-                    console.log('整点领红包-2:' + body)
+                    // console.log('整点领红包-2:' + body)
                     request({
                         url: 'https://mobile01.91quzou.com/rebate/qz/task/receive.do',
                         method: 'POST',
@@ -716,7 +716,7 @@ this.zhengDian = function (header) {
                 }, function (error, res, body) {
                         if (!error && res.statusCode == 200) {
                             //输出返回的内容
-                            console.log('整点领红包-3:' + body)
+                            // console.log('整点领红包-3:' + body)
                             // this.richang();
                         }
                     })
