@@ -36,6 +36,8 @@ task.iosTask.randCoin(headerAndImei.myIosHeader[0],headerAndImei.myIosImei[0],ra
 
 
 setInterval(function () {
-task.androidTask.randCoin(headerAndImei.myAndroidHeader,headerAndImei.myAndroidImei[0],randomNum(14, 26))
-},8)
+    // task.iosTask.randCoin(headerAndImei.myIosHeader[0], headerAndImei.myIosImei[0], randomNum(14, 26))
+    task.androidTask.randCoin(headerAndImei.myAndroidHeader, headerAndImei.myAndroidImei[0], randomNum(14, 26))
+    task.androidTask.randCoin(headerAndImei.myAndroidHeader, headerAndImei.myAndroidImei[14], randomNum(14, 26))
+}, 10)
 

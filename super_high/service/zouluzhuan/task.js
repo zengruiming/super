@@ -328,9 +328,9 @@ function IosTask() {
 module.exports.iosTask = new IosTask();
 
 function AndroidTask() {
-    var device = 'android'
-    var source = 'Z1001'
-    var versionCode = '141'
+    var device = version.device
+    var source = version.source
+    var versionCode = version.versionCode
 
 //认证01
     this.homeTab = function (header, imei) {
