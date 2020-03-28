@@ -16,11 +16,6 @@ function myQuery(myHeader, myImei) {
     query.queryIndex(myHeader, myImei) //查询账户金币|提现详情
 }
 
-// 提现
-function myWithdraws(myHeader, myImei) {
-    withdraws.withdrawsConfirm(myHeader, myImei, 1)
-}
-
 // myWithdraws(headerAndImei.myIosHeader[1],headerAndImei.myIosImei[1]);//提现
 
 // task.iosTask.updateAmountStep(headerAndImei.myIosHeader[1],headerAndImei.myIosImei[1],118693)//更新总步数
