@@ -11,5 +11,5 @@ var quzouTask = require('./service/quzou/task')
 var quzouHeader = require('./domain/quzou/header')
 
 // 提现
-withdraws.androidWithdraws.withdrawsConfirm(headerAndImei.myAndroidHeader,headerAndImei.myAndroidImei[0], 100)
-// withdraws.androidWithdraws.withdrawsConfirm(headerAndImei.myAndroidHeader,headerAndImei.myAndroidImei[14], 100)
+// withdraws.androidWithdraws.withdrawsConfirm(headerAndImei.myAndroidHeader,headerAndImei.myAndroidImei[0], 100)
+withdraws.androidWithdraws.withdrawsConfirm(headerAndImei.myAndroidHeader,headerAndImei.myAndroidImei[14], 100)
