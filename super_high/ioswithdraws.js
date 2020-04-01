@@ -10,13 +10,8 @@ var headerAndImei = require('./domain/zouluzhuan/headerAndImei')
 var quzouTask = require('./service/quzou/task')
 var quzouHeader = require('./domain/quzou/header')
 
-// 安卓提现
-var androidImeiIndex = [0,12,14]
-var androidIndex=0
-withdraws.androidWithdraws.withdrawsConfirm(headerAndImei.myAndroidHeader, headerAndImei.myAndroidImei[androidImeiIndex[androidIndex]], androidImeiIndex[androidIndex], 100)
-
 // ios提现
-var IosImeiIndex = [0]
-var IosIndex=0
+var iosImeiIndex = [0]
+var iosIndex=0
 
-withdraws.iosWithdraws.withdrawsConfirm(headerAndImei.myIosHeader[IosImeiIndex[IosIndex]], headerAndImei.myIosImei[IosImeiIndex[IosIndex]], IosImeiIndex[IosIndex], 100)
+withdraws.iosWithdraws.withdrawsConfirm(headerAndImei.myIosHeader[iosImeiIndex[iosIndex]], headerAndImei.myIosImei[iosImeiIndex[iosIndex]], iosImeiIndex[iosIndex], 100)

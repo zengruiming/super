@@ -8,7 +8,7 @@ var request = require('request');
 function IosWithdraws() {
 
 //提现
-    this.withdrawsConfirm = function (header, imei, price) {
+    this.withdrawsConfirm = function (header, imei, index, price) {
         request({
             url: 'https://api.xiaomuyu888.com/api/withdraws/confirm',
             method: 'POST',
@@ -18,7 +18,7 @@ function IosWithdraws() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('提现:' + body)
+                console.log(index + '提现:' + body)
             }
         })
     }
@@ -30,7 +30,7 @@ module.exports.iosWithdraws = new IosWithdraws();
 function AndroidWithdraws() {
 
 //提现
-    this.withdrawsConfirm = function (header, imei, price) {
+    this.withdrawsConfirm = function (header, imei, index, price) {
         request({
             url: 'http://api.xiaomuyu888.com/api/withdraws/confirm',
             method: 'POST',
@@ -40,7 +40,7 @@ function AndroidWithdraws() {
         }, function (error, res, body) {
             if (!error && res.statusCode == 200) {
                 //输出返回的内容
-                console.log('提现:' + body)
+                console.log(index + '提现:' + body)
             }
         })
     }
