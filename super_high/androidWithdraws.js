@@ -12,6 +12,6 @@ var quzouHeader = require('./domain/quzou/header')
 
 // 安卓提现
 var androidImeiIndex = [0,12,14]
-var androidIndex=0
+var androidIndex=2
 
 withdraws.androidWithdraws.withdrawsConfirm(headerAndImei.myAndroidHeader, headerAndImei.myAndroidImei[androidImeiIndex[androidIndex]], androidImeiIndex[androidIndex], 100)

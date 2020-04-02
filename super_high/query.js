@@ -21,8 +21,9 @@ function myQuery(myHeader, myImei) {
 // task.iosTask.updateAmountStep(headerAndImei.myIosHeader[1],headerAndImei.myIosImei[1],118693)//更新总步数
 // task.iosTask.memberIndex(headerAndImei.myIosHeader[1],headerAndImei.myIosImei[1])//查账户信息
 
-// myQuery(headerAndImei.myIosHeader[0],headerAndImei.myIosImei[0]);//查收益详情、账户金币和提现详情
+myQuery(headerAndImei.myIosHeader[0],headerAndImei.myIosImei[0]);//查收益详情、账户金币和提现详情
 myQuery(headerAndImei.myAndroidHeader,headerAndImei.myAndroidImei[0]);//查收益详情、账户金币和提现详情
+myQuery(headerAndImei.myAndroidHeader,headerAndImei.myAndroidImei[12]);//查收益详情、账户金币和提现详情
 myQuery(headerAndImei.myAndroidHeader,headerAndImei.myAndroidImei[14]);//查收益详情、账户金币和提现详情
 
 // task.iosTask.updateUmengDeviceToken(headerAndImei.myIosHeader[0],headerAndImei.myIosImei[0],'bc40fa2a2236163a78ca2bd5f8a377a1f2f950fae79f86e54d310d92b80bdf03')//更新DeviceToken
