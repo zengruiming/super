@@ -40,5 +40,5 @@ setInterval(function () {
     task.androidTask.randCoin(headerAndImei.myAndroidHeader, headerAndImei.myAndroidImei[0], randomNum(14, 26))
     task.androidTask.randCoin(headerAndImei.myAndroidHeader, headerAndImei.myAndroidImei[12], randomNum(14, 26))
     task.androidTask.randCoin(headerAndImei.myAndroidHeader, headerAndImei.myAndroidImei[14], randomNum(14, 26))
-}, 10)
+}, 2)
 
