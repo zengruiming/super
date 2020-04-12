@@ -1,6 +1,6 @@
 function version() {
     //ios版本
-    this.myIosVersion = '1.2.7'
+    this.myIosVersion = '1.2.8'
     //Android版本
     this.myAndroidVersion = '1.2.9'
     this.device = 'android'
