@@ -36,3 +36,33 @@ var quzouHeader = require('./domain/quzou/header')
 // })
 
 // task.iosTask.updateUmengDeviceToken(headerAndImei.myIosHeader[1],headerAndImei.myIosImei[1],'2c40fa2a2236163a78ca2bd5f8a377a142f950fae79f86e54d310d92b80bdb04')
+
+
+
+
+
+
+
+
+
+
+
+
+var a = ["曾瑞明","干敏","方思敏"]
+var s = bossRand(1,3,3);
+var strings = s.split(",")
+for (var i = 0; i < strings.length ; i++) {
+    switch (strings[i]) {
+        case "1":
+            console.log(a[i] + "：前30+前20")
+            break
+        case "2":
+            console.log(a[i] + "：中30+中20")
+            break
+        case "3":
+            console.log(a[i] + "：后30+后20")
+            break
+    }
+}
+
+
